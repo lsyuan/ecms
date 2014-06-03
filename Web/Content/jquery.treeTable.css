@@ -1,0 +1,63 @@
+/* jQuery TreeTable Core 2.0 stylesheet
+ *
+ * This file contains styles that are used to display the tree table. Each tree
+ * table is assigned the +treeTable+ class.
+ * ========================================================================= */
+
+/* jquery.treeTable.collapsible
+ * ------------------------------------------------------------------------- */
+table.treeTable tr td .expander { background-position: left center; background-repeat: no-repeat; cursor: pointer; padding: 0; zoom: 1; /* IE7 Hack */ }
+table.treeTable tr.collapsed td .expander { background: url(images/expand.png) no-repeat center; }
+table.treeTable tr.expanded td .expander { background: url(images/collapse.png) no-repeat center; }
+/* jquery.treeTable.sortable
+ * ------------------------------------------------------------------------- */
+table.treeTable tr.selected, .treeTable tr.accept { background-image: url(images/selectedBG.png); background-position: left bottom; background-repeat: repeat-x; }
+table.treeTable .ui-draggable-dragging { color: #000; z-index: 1; }
+/*----------LP ADD-----------*/
+/*Table	*/
+table.treeTable { border-collapse: collapse; border: 1px solid #6699FF; margin-top: 5px; }
+	table.treeTable caption { text-align: left; height: 22px; line-height: 22px; border: 1px solid #6699FF; border-bottom: none; padding-left: 0.5em; font-weight: bold; background: #aaa url(images/caption.png) repeat-x bottom left; }
+
+	/*TD,TH*/
+	table.treeTable td, table.treeTable th { height: 22px; line-height: 22px; border: 1px solid #6699FF; padding: 0px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+	/*表头*/
+	table.treeTable thead { background: #aaa url(images/headbg.png) repeat top left; }
+		/*表头TH*/
+		table.treeTable thead th { border: 1px solid #6699FF; }
+
+	/*表尾*/
+	table.treeTable tfoot { background: #aaa url(images/tfootBG.png) repeat-x bottom left; border: 1px solid #6699FF; }
+
+	/*显示Tree的TD*/
+	table.treeTable td.treeColumn { padding-left: 19px; border: 1px solid #6699FF; }
+
+	/*奇数行*/
+	table.treeTable tr.odd { background-color: #EDF3F6; border: 1px solid #6699FF; }
+	/*偶数行*/
+	table.treeTable tr.even { background-color: #FFFFFF; border: 1px solid #6699FF; }
+	/*焦点行background-image: url(images/hoverBG.png); background-position: left bottom; background-repeat: repeat-x; */
+	table.treeTable tr.hover td { background-color: rgb(199, 221, 235); border: 1px solid #6699FF; }
+/*----------LP ADD END-----------*/
+
+/*--------FixedHeaderTable--------*/
+div.fixed { top: 0px; bottom: 0px; left: 0px; right: 0px; position: absolute; overflow: hidden; }
+div.fixed-head { top: 0px; left: 0px; right: 17px; position: absolute; }
+div.fixed-content { top: 0px; bottom: 0px; left: 0px; right: 0px; position: absolute; overflow-y: auto; overflow-x: hidden; }
+
+
+/* -- 区划选择弹出框 重载 treeTable 样式 --- */
+.region_popup_class table.treeTable tr.odd { background-color: #FFFFFF; }
+.region_popup_class table.treeTable tr.even { background-color: #FFFFFF; }
+.region_popup_class table.treeTable { border: none; }
+	.region_popup_class table.treeTable td { border: none; }
+	.region_popup_class table.treeTable tr.hover td { background-image: none; color: #0000FF; font-weight: bold; cursor: default; }
+	.region_popup_class table.treeTable tr.row_selected, .treeTable tr.accept { background-image: none; background-color: #AAFFAA; }
+
+/* -- 左侧导航菜单 重载 treeTable 样式 --- */
+.left_menu_class table.treeTable tr.odd { background-color: #FFFFFF; }
+.left_menu_class table.treeTable tr.even { background-color: #FFFFFF; }
+.left_menu_class table.treeTable { border: none; }
+	.left_menu_class table.treeTable td { border: none; }
+	.left_menu_class table.treeTable tr.hover td { cursor: default; font-weight: bold; color: #FFFFFF; background-image: url(/image/Home/Index/leftMenuBg_hover.png); background-repeat: no-repeat; background-position: left center; }
+	.left_menu_class table.treeTable tr.row_selected, .left_menu_class table.treeTable tr.accept { font-weight: bold; color: #FFFFFF; background-image: url(/image/Home/Index/leftMenuBg.png); background-repeat: no-repeat; background-position: left center; }

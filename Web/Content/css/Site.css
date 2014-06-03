@@ -1,0 +1,92 @@
+/**********************************************************自定义CSS开始************************************************************/
+/**
+布局css
+**/
+html, body { list-style: none; }
+
+.LayOutTop { position: absolute; left: 3px; top: 3px; right: 3px; height: 90px; overflow: auto; background-image: url('../../Content/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png'); background-repeat: repeat-x; }
+
+.LayOutSide { position: absolute; left: 3px; top: 98px; bottom: 27px; width: 180px; overflow: auto; }
+
+.LayOutMain { position: absolute; left: 187px; top: 98px; bottom: 27px; right: 3px; overflow: auto; }
+
+.LayOutSide1 { position: absolute; left: 3px; top: 98px; bottom: 27px; width: 9px; overflow: auto; cursor: pointer; background-image: url('../../Content/images/ui-bg_flat_0_aaaaaa_40x100.png'); background-repeat: repeat; }
+
+.LayOutMain1 { position: absolute; left: 17px; top: 98px; bottom: 27px; right: 3px; overflow: auto; }
+
+.LayOutBottom { position: absolute; left: 3px; bottom: 2px; right: 3px; height: 24px; overflow: auto; }
+
+.Bar { width: 100%; padding-left: 9px; height: 30px; margin-bottom: 2px; }
+
+a { text-decoration: none; font-size: 10pt; font-family: 微软雅黑; }
+	a:link { color: #3366CC; }
+	a:visited { color: #3366CC; }
+	a:hover { color: #3366CC; }
+	a:active { color: #3366CC; }
+.onMousOver { border: 1px solid #b0d4ed; }
+
+.onMousClick { border: 1px solid #699cbf; background-color: #b1bdc8; }
+
+.span { padding: 3px 2px 0 0; float: left; display: inline; }
+
+.textbox { border: 0px; height: 24px; line-height: 24px; overflow: hidden; background: url('../../Content/images/border.png') 0 -72px repeat-x; }
+
+.aq_box { padding-left: 3px; background: url('../../Content/images/border.png') left -24px no-repeat; float: left; }
+
+.aq_box_wrap { padding-right: 3px; background: url('../../Content/images/border.png') right -24px no-repeat; }
+
+.aq_box.hover { background-position: left top; }
+
+	.aq_box.hover .aq_box_wrap { background-position: right top; }
+
+	.aq_box.hover .textbox { background-position: 0 -48px; }
+
+.select { width: 100px; height: 22px; font-family: 微软雅黑; font-size: 12px; }
+
+.foot { text-align: center; margin: auto; }
+
+.footBar { position: absolute; bottom: 1px; width: 90%; text-align: center; margin: auto; }
+
+.tips { color: #435fae; background: url('../../Content/images/EasyUIImages/tip.png') no-repeat; vertical-align: middle; font-size: 9pt; padding-left: 16px; }
+
+/*菜单样式*/
+.menuParent { background: url('../../Content/images/menu_bg.jpg'); height: 22px; line-height: 22px; font-size: 10pt; font-family: 微软雅黑; background-position: left top; background-repeat: no-repeat; }
+
+.menuChild { background: url('../../Content/images/menu_bt.jpg'); margin-left: 2px; height: 22px; line-height: 22px; cursor: pointer; font-size: 10pt; font-family: 微软雅黑; background-position: left top; padding-left: 15px; background-repeat: no-repeat; }
+
+.menuChildItem { background: url('../../Content/images/menu_icon.gif'); height: 22px; line-height: 22px; cursor: pointer; font-size: 10pt; font-family: 微软雅黑; background-position: center left; padding-left: 15px; background-repeat: no-repeat; }
+
+.bold { font-weight: bold; }
+
+.toolbar { height: 30px; line-height: 30px; }
+
+.popup { border: 1px solid #435fae; background-color: #699cbf; height: 24px; width: 33px; line-height: 24px; }
+
+/**AutoComplate**/
+.ac_results { padding: 0px; border: 1px solid #A6C9E2; background-color: white; overflow: hidden; margin-left: -3px; z-index: 99999; }
+
+	.ac_results ul { width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0; }
+
+	.ac_results li { margin: 0px; padding: 2px 5px; cursor: default; display: block; }
+
+.ac_loading { }
+
+.ac_odd { background-color: #eee; }
+
+.ac_over { background-color: #88b6d7; color: white; }
+
+select { height: 24px; font-size: 13px; font-family: 微软雅黑; width: 160px; line-height: 16px; }
+/*编辑布局表格样式*/
+.EditTable { margin: 0 auto; border-left: 1px solid #ccc; border-top: 1px solid #ccc; border-spacing: 0px; }
+	.EditTable th { border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; background-color:#ccc }
+	.EditTable td { border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+/*通用布局table*/
+.layoutTable { border-spacing: 0px; width: 100%; font-size: 14px; margin: 0 auto; margin-left: auto; margin-right: auto; }
+	.layoutTable tr { height: 30px; }
+	.layoutTable th { border-right: 1px solid #4cace5; border-bottom: 1px solid #4cace5; }
+	.layoutTable td { /*border-right: 1px solid #4cace5;*/ border-bottom: 1px solid #4cace5; }
+	.layoutTable input { border: 1px solid #5a81c4; width: 160px; }
+	.layoutTable select { border: 1px solid #5a81c4; width: 163px; }
+/**/
+.normalButton { display: block; width: 98px; color: red; height: 33px; background: url(../../Content/images/m_t.png) no-repeat 0 0; text-indent: -9999px; outline: none; }
+a:hover .normalButton, a:focus .normalButton { color: red; background: url(../../Content/images/m_t.png) no-repeat 0 -33px; }
