@@ -1,0 +1,164 @@
+﻿@using Ajax.Model;
+@{
+    ViewBag.Title = "客户信息查询";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Customer/Query.js")"></script>
+    <style>
+        .AgreementMoney, .ItemCount { width: 60px;height:18px; }
+    </style>
+}
+<div class="toolbar" id="div">客户名称：
+    <input type="hidden" id="CustomerID" dn="ID" />
+    <input type="text" id="txtCustomerName" />
+    客户状态：
+    <select id="dpStatus" dn="Status" onchange="hideButton()">
+        <option value="1" selected="selected">正常</option>
+        <option value="-1">全部</option>
+        <option value="0">未审核</option>
+        <option value="2">暂停缴费</option>
+        <option value="3">已删除</option>
+    </select>
+    地区选择 
+    <input type="hidden" id="txtAreaID1" dn="AreaID" />
+    <input type="text" id="txtAreaIDSearch" vrequired="t" readonly="readonly" dn="AreaName" />
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="gridCustomers">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="Name" width="100">客户名称</th>
+            <th field="Contactor" width="100">联系人</th>
+            <th field="TypeName" width="100">客户类型</th>
+            <th field="Status" width="100">客户状态</th>
+            <th field="FeeType" width="100">缴费类型</th>
+            <th field="CreateTime">创建时间</th>
+            <th field="Address" width="120">地址</th>
+        </tr>
+    </thead>
+</table>
+
+<!--地区选择框dialog begin-->
+<div id="dArea">
+    <table id="areaTreeGrid" class="easyui-treegrid" checkbox="true" url="/System/GetAllAreaJson" idfield="Identifier" treefield="Area_Name" fitcolumns="true">
+        <thead>
+            <tr>
+                <th field="Identifier" checkbox="true" rowspan="2" editor="text">地区码</th>
+                <th field="Area_Name" rowspan="2" width="150" editor="text">地区</th>
+                <th field="Manager" rowspan="2" width="50">区域负责人</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!--地区选择框dialog end-->
+<!--编辑客户信息dialog begin-->
+<div id="dgEdit" action="#">
+    <form id="frmCustomer">
+        <table class="layoutTable">
+            <tr>
+                <td style="text-align: right; width: 20%;">
+                    <label class="name">客户编号:</label></td>
+                <td style="color: Gray; width: 20%;">
+                    <input type="text" readonly="readonly" id="CustomerCode" dn="Code" /></td>
+                <td style="text-align: right; width: 20%;">
+                    <label class="name">客户名称:</label></td>
+                <td style="width: 20%;">
+                    <input type="hidden" id="txtID" name="ID" dn="ID" />
+                    <input type="text" id="Cname" dn="Name" vrequired="t" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">联系人:</label>
+                </td>
+                <td>
+                    <input type="text" id="Lname" dn="Contactor" vrequired="t" /></td>
+                <td>
+                    <label class="name">联系电话:</label></td>
+                <td>
+                    <input type="text" id="PHONE" dn="Phone" class="easyui-numberbox" vrequired="t" data-options="min:0,precision:0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">手机:</label></td>
+                <td>
+                    <input type="text" id="MobilePhone" dn="MobilePhone" class="easyui-numberbox" />
+                </td>
+                <td>
+                    <label class="name">负责人:</label>
+                </td>
+                <td>
+                    <input type="text" id="txtManager" vrequired="t" dn="MANAGERNAME" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">所在区域:</label>
+                </td>
+                <td>
+                    <input type="text" id="txtAreaName" vrequired="t" readonly="readonly" />
+                </td>
+                <td>
+                    <label class="name">客户类型:</label>
+                </td>
+                <td>
+                    <select id="dpCustomerType" jsonurl='/Customer/CustomerAllTypeJson' dn="TypeID"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">代缴费权限:</label></td>
+                <td>
+                    <select id="dpAgent" name="Agent" dn="Agent">
+                        <option value="0">无</option>
+                        <option value="1">有</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="name" id="lblParent">父客户:</label></td>
+                <td>
+                    <input type="text" id="txtParentName" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">地址:</label></td>
+                <td colspan="3">
+                    <input type="text" id="ADDRESS" dn="Address" /></td>
+            </tr>
+        </table>
+
+        <!--对应缴费项设置-->
+        <table id="tableChargeItem" class="EditTable" style="margin: 0 auto; width:99%;">
+            <thead>
+                <tr>
+                    <th>收费项名称</th>
+                    <th>收费单价</th>
+                    <th>收费单位</th>
+                    <th>周期性收费</th>
+                    <th>能否按协议</th>
+                    <th>数量</th>
+                    <th>单项金额</th>
+                    <th>协议金额</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8" align="right">缴费项总数：<label id="lblFeeItemCount">0</label>
+                        一次性缴费总数：<label id="lblFeeCount">0</label></td>
+                </tr>
+            </tfoot>
+        </table>
+        <!--other field-->
+        <input type="hidden" id="BeginChargeDate" dn="BeginChargeDate" />
+        <input type="hidden" id="OperatorID" dn="OperatorID" />
+        <input type="hidden" id="CreateTime" dn="CreateTime" />
+        <input type="hidden" id="Status" dn="Status" />
+        <input type="hidden" id="StateID" dn="StateID" />
+    </form>
+</div>
+<!--编辑客户信息dialog end-->

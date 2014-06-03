@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "当前待处理信息";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@section head{
+    <style type="text/css">
+        body { margin: 0px; }
+        .LinkMore { position: absolute; right: 10px; }
+        ul { margin: 0; padding: 0; list-style: none; font-size: 12px; }
+            ul li { text-decoration: none; list-style: none; height: 23px; line-height: 25px; padding-left: 26px; background-image: url(../../Content/images/menu_icon.gif); background-position: 10px 10px; background-repeat: no-repeat; }
+                ul li a { margin-right: 10px; font-size: 14px; font-weight: bolder; }
+        span { color: #3960a2; }
+    </style>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/rounded_corners_lite.inc.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/js/System/TipMsg.js")" type="text/javascript"></script>
+}
+
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 50%;">
+            <div class="cornerPanel">
+                <div class="title">最新公告<a href="/Normal/Message" class="LinkMore">更多....</a></div>
+                <div class="content" style="overflow-y: auto;">
+                    <ul id="MsgList"></ul>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="cornerPanel">
+                <div class="title">欠费用户<a href="/Normal/ArrearTips" class="LinkMore">更多....</a></div>
+                <div class="content" style="overflow-y: auto;">
+                    <ul>
+                        <li>
+                            <a href="/Normal/ArrearTips">好利来商行</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-05-12</span>
+                        </li>
+                        <li>
+                            <a href="#">金装装饰公司</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-04-01</span>
+                        </li>
+                        <li>
+                            <a href="#">流星雨网吧</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-05-14</span>
+                        </li>
+                        <li>
+                            <a href="#">夕阳会所</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-02-22</span>
+                        </li>
+                        <li>
+                            <a href="#">新城市汽车</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-07-03</span>
+                        </li>
+                        <li>
+                            <a href="#">远洋房产</a>
+                            <span style="position: absolute; right: 10px;">上次缴费：2013-05-05</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 50%;">
+            <div class="cornerPanel">
+                <div class="title">协议到期提醒<a href="/Business/ContrastMgr" class="LinkMore">更多....</a></div>
+                <div class="content" style="overflow-y: auto;">
+                    <!--content begin-->
+                    <ul id="ContractList"></ul>
+                    @*<ul>
+                        <li>
+                            <a href="/Business/ContrastMgr">夕阳会所</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-11-04</span>
+                        </li>
+                        <li>
+                            <a href="#">新城市汽车</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-01-15</span>
+                        </li>
+                        <li>
+                            <a href="#">流星雨网吧</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-03-30</span>
+                        </li>
+                        <li>
+                            <a href="#">好利来商行</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-06-21</span>
+                        </li>
+                        <li>
+                            <a href="#">金装装饰公司</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-01-13</span>
+                        </li>
+                        <li>
+                            <a href="#">远洋房产</a>
+                            <span style="position: absolute; right: 10px;">到期时间：2013-05-12</span>
+                        </li>
+                    </ul>*@
+                </div>
+            </div>
+
+        </td>
+        <td>
+            <div class="cornerPanel">
+                <div class="title">一般统计<a href="/Normal/Message" class="LinkMore">更多....</a></div>
+                <div class="content" style="overflow-y: auto;">
+                    <table style="border: 0; width: 100%;">
+                        <tr>
+                            <td>
+                                <img src="../../Content/images/temp/p1.PNG" style="width: 300px; height: 140px;" /></td>
+                            <td>
+                                <img src="../../Content/images/temp/p2.PNG" style="width: 300px; height: 140px;" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="../../Content/images/temp/p3.PNG" style="width: 300px; height: 140px;" /></td>
+                            <td>
+                                <img src="../../Content/images/temp/p4.PNG" style="width: 300px; height: 140px;" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<!--公告详细弹出框 begin-->
+<div id="dgMsgDetail" style="text-align: center;">
+    <p>
+        <label id="msgTitle" style="font-weight: bolder; font-size: 14px;"></label>
+    </p>
+    <hr />
+    <div id="msgContent"></div>
+    <div style="position: absolute; bottom: 10px; text-align: center; margin: auto; margin-left: auto; margin-right: auto; width: 100%">
+        <a href="#" class="web_button" onclick="HidePanel()">关&nbsp;&nbsp;&nbsp;&nbsp;闭</a>
+        <p></p>
+    </div>
+</div>
+<!--公告详细弹出框 end-->
+
+
+
+
+
+
+

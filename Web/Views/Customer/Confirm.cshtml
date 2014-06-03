@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "客户审批";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{ 
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/Customer/CustomerConfirm.js")"></script>
+}
+<style type="text/css">
+.name{font-weight:bolder;}
+</style>
+
+<table id="dgCustomers">
+ <thead>  
+        <tr>  
+            <th field="ID" checkbox="true" width="30">选择</th>  
+            <th field="Name" width="100">客户名称</th>  
+            <th field="TypeID" width="70">缴费类型</th>  
+            <th field="Status" width="120">客户状态</th>  
+            <th field="Contactor" width="100">联系人</th>  
+            <th field="Address" width="120">地址</th>
+			<th field="CreateTime">查看详细</th>  
+        </tr>  
+    </thead>  
+</table> 
+
+<!--显示详细信息dialog begin-->
+<div id="dgEdit" action="#">
+    <form id="frmCustomer">
+        <table class="layoutTable">
+            <tr>
+                <td style="text-align: right; width: 20%;">
+                    <label class="name">客户编号:</label></td>
+                <td style="color: Gray; width: 20%;">
+                    <label id="lblCustomerNum" dn="Code"></label>
+                </td>
+                <td style="text-align: right; width: 20%;">
+                    <label class="name">客户名称:</label></td>
+                <td style="width: 20%;">
+                    <input type="hidden" id="txtID" name="ID" dn="ID" />
+                    <label id="Cname" dn="Name"  ></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">联系人:</label>
+                </td>
+                <td>
+                    <label id="Lname" dn="Contactor"></label>
+                    </td>
+                <td>
+                    <label class="name">联系电话:</label></td>
+                <td>
+                    <label id="PHONE" dn="Phone"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">手机:</label></td>
+                <td>
+                    <label id="MobilePhone" dn="MobilePhone"></label>
+                </td>
+                <td>
+                    <label class="name">负责人:</label>
+                </td>
+                <td>
+                   <label id="lblPerson" dn="OPERATORNAME"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">所在区域:</label>
+                </td>
+                <td>
+                    <input type="hidden" id="txtAreaID" dn="AreaID" />
+                    <label id="lblAreaName"></label>
+                </td>
+                <td>
+                    <label class="name">客户类型:</label>
+                </td>
+                <td>
+                    <select id="dpCustomerType" JsonUrl='/Customer/CustomerAllTypeJson' dn="TypeID" disabled="disabled"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">代缴费权限:</label></td>
+                <td>
+                    <select name="Agent" disabled="disabled">
+                        <option value="0">无</option>
+                        <option value="1">有</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="name" id="lblParent">父客户:</label></td>
+                <td>
+                    <label id="lblParentName" dn="PARENTNAME"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">地址:</label></td>
+                <td colspan="3">
+                    <label id="ADDRESS" dn="Address"></label>
+               </td>
+            </tr>
+        </table>
+        <!--对应缴费项设置-->
+        <table id="tableChargeItem" class="EditTable" style="margin: 0 auto;">
+            <thead>
+                <tr>
+                    <th>收费项名称</th>
+                    <th>收费单价</th>
+                    <th>收费单位</th>
+                    <th>周期性收费</th>
+                    <th>是否按协议</th>
+                    <th>数量/协议金额</th>
+                    <th>单项金额</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7" align="right">缴费项总数：<label id="lblFeeItemCount">0</label>
+                        一次性缴费总数：<label id="lblFeeCount">0</label></td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<!--显示详细信息dialog end-->

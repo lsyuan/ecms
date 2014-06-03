@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "公告通知";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="../../Scripts/js/Normal/Message.js"></script>
+    <style type="text/css">
+        #msgContent { text-align: left; padding-left: 10px; padding-right: 10px; }
+    </style>
+}
+<div class="toolbar">筛选条件：
+	<select id="dpStatus" name="OperatorID">
+        <option value="-1">全部</option>
+        <option value="0">未看</option>
+        <option value="1">已看</option>
+    </select>
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="dgMsgs">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true">公告名称</th>
+            <th field="TITLE" width="100">公告名称</th>
+            <th field="CREATEDATE" width="100">发布时间</th>
+            <th field="STATUS" width="100">是否已查看</th>
+            <th field="VIEW" style="visibility: hidden">点击查看</th>
+        </tr>
+    </thead>
+</table>
+<!--公告详细弹出框 begin-->
+<div id="dgMsgDetail" style="text-align: center;">
+    <p>
+        <label id="msgTitle" style="font-weight: bolder; font-size: 14px;"></label>
+    </p>
+    <hr />
+    <div id="msgContent"></div>
+    <div style="position: absolute; bottom: 10px; text-align: center; margin: auto; margin-left: auto; margin-right: auto; width: 100%">
+        <a href="#" class="web_button" onclick="HidePanel()">关&nbsp;&nbsp;&nbsp;&nbsp;闭</a>
+        <p></p>
+    </div>
+</div>
+<!--公告详细弹出框 end-->

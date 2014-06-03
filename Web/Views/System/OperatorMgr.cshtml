@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "系统用户管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <style type="text/css">
+        #formGrantGroup ul li { display: block; float: left; margin-right: 5px; }
+    </style>
+    <script src="@Url.Content("~/Scripts/js/System/OperatorMgr.js")" type="text/javascript"></script>
+}
+
+<div class="toolbar" style="display: none">用户名称：<input type="text" id="txtName" />
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+
+<table id="OperatorDataTable">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="133">全选</th>
+            <th field="NAME" width="133">操作员名称 </th>
+            <th field="EMPNAME" width="133">职员名称</th>
+            <th field="STATUS" width="133">状态</th>
+            <th field="ISADMIN" width="133">超级管理员</th>
+            <th field="CREATEDATE" width="133">创建时间</th>
+            <th field="GROUPNAME" width="133">用户组</th>
+        </tr>
+    </thead>
+</table>
+<!--新增操作员begin-->
+<div id="dgAddorEditOperator" action="#">
+    <table border="0" cellpadding="0" cellspacing="0" class="layoutTable">
+        <tr>
+            <td>
+                <input type="hidden" value="" id='ID' dn="ID" />
+                <input type="hidden" value="" id='EmployeeID' dn="EMPLOYEEID" />
+                <label class="name">职工姓名：</label></td>
+            <td>
+                <input type="text" dn="EMPNAME" id="EMPLOYEENAME" vrequired="t" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">登录名：</label></td>
+            <td>
+                <input type="text" name="name" dn="NAME" id="NAME" vrequired="t" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">超级管理员：</label></td>
+            <td>
+                <select id="IsSuperAdmin" class="select" dn="ISADMIN">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">所属角色：</label></td>
+            <td>
+                <select id="selVoteGroup" dn="GroupID" jsonurl="/System/GroupSelectList"></select></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">初始密码：</label></td>
+            <td>
+                <input type="password" name="pwd" dn="PWD" id="txtPWD" vrequired="t" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">密码确认：</label></td>
+            <td>
+                <input type="password" id="txtPWDconfirm" dn="PWD" vrequired="t" />
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" id="CreateDate" dn="CreateDate" />
+</div>
+<!--新增操作员end-->

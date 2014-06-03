@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "缴费审核";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Charge/chargeConfirm.js")"></script>
+}
+<div id="confirmTabs" class="easyui-tabs" style="">
+    <div title="客户缴费审批" style="padding: 10px;">
+        <table id="gridCustomerCharge">
+            <thead>
+                <tr>
+                    <th field="ID" checkbox="true" width="30">选择</th>
+                    <th field="CustomerName" width="100">客户名称</th>
+                    <th field="Money" width="100">缴费总金额</th>
+                    <th field="CreateTime" width="100">缴费时间</th>
+                    <th field="OperName" width="50">操作员</th>
+                    <th field="Detail">缴费详情</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div title="临时缴费审批" style="overflow: auto; padding: 10px;">
+        <table id="gridTempCharge">
+            <thead>
+                <tr>
+                    <th field="ID" checkbox="true" width="30">选择</th>
+                    <th field="CustomerName" width="100">客户名称</th>
+                    <th field="ChargeName" width="100">收费名称</th>
+                    <th field="Money" width="100">收费总金额</th>
+                    <th field="CreateTime" width="100">收费时间</th>
+                    <th field="OperName" width="100">操作员</th>
+                    <th field="Detail" width="50">缴费详情</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div title="其他缴费审批" style="overflow: auto; padding: 10px;">
+        <table id="gridOtherCharge">
+            <thead>
+                <tr>
+                    <th field="ID" checkbox="true" width="30">选择</th>
+                    <th field="CustomerName" width="100">客户名称</th>
+                    <th field="Money" width="100">应缴金额</th>
+                    <th field="ActMoney" width="100">实缴金额</th>
+                    <th field="ChargeDate" width="100">缴费时间</th>
+                    <th field="OperatorName" width="100">操作人员</th>
+                    <th field="Detail" width="50">缴费详情</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div title="期初欠费缴费审批" style="overflow: auto; padding: 10px;">
+        <table id="gridFirstMoneyCharge">
+            <thead>
+                <tr>
+                    <th field="ID" checkbox="true" width="30">选择</th>
+                    <th field="Name" width="70">客户名称</th>
+                    <th field="Money" width="100">欠费金额</th>
+                    <th field="Status" width="70">缴费状态</th>
+                    <th field="ChargeDate" width="70">缴费时间</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<!--dialog begin-->
+<div id="dgChargeDetail">
+    <table id="CustomerDetail"  style="width: 100%" cellspacing="1" cellpadding="5" border="0" bgcolor="Gray">
+        <thead style="font-weight: bolder" bgcolor="#ffffff">
+            <th>收费项名称</th>
+            <th>收费数量</th>
+            <th>收费时间</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <table id="TempDetail"  style="width: 100%" cellspacing="1" cellpadding="5" border="0" bgcolor="Gray">
+        <thead style="font-weight: bolder" bgcolor="#ffffff">
+            <th>收费名称</th>
+            <th>缴费项名称</th>
+            <th>收费数量</th>
+            <th>缴费金额</th>
+            <th>缴费时间</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <table id="OtherChargeDetail" style="width: 100%" cellspacing="1" cellpadding="5" border="0" bgcolor="Gray">
+        <tr bgcolor="#ffffff">
+            <td>
+                <label class="name">客户名称</label></td>
+            <td><b>
+                <label id="txtCustomerName" dn="CUSTOMERNAME"></label>
+            </b></td>
+            <td>
+                <label class="name">缴费项描述</label></td>
+            <td><b>
+                <label id="txtChargeItem" dn="CHARGEITEM"></label>
+            </b></td>
+        </tr>
+        <tr bgcolor="#ffffff">
+            <td>
+                <label class="name">应缴金额</label></td>
+            <td><b>
+                <label id="txtMoney" dn="MONEY"></label>
+            </b>￥</td>
+            <td>
+                <label class="name">实缴金额</label></td>
+            <td><b>
+                <label id="txtActMoney" dn="ACTMONEY"></label>
+            </b>￥</td>
+        </tr>
+        <tr bgcolor="#ffffff">
+            <td>
+                <label class="name">经办人员</label></td>
+            <td><b>
+                <label id="txtOperName" dn="OPERATORNAME"></label>
+            </b></td>
+            <td>
+                <label class="name">缴费时间</label></td>
+            <td><b>
+                <label id="txtChargeDate" dn="CHARGEDATE"></label>
+            </b></td>
+        </tr>
+    </table>
+</div>
+<!--dialog end-->
+

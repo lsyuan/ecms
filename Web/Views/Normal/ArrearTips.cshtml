@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "欠费提醒";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+<script type="text/javascript" src="@Url.Content("~/Scripts/js/Normal/ArrearTips.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/LodopFuncs.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/template.min.js")"></script>
+}
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" height="0"   width="0">
+    <embed id="LODOP_EM" height="0" pluginspage="install_lodop.exe" type="application/x-print-lodop" width="0"></embed>
+</object>
+<div class="toolbar">区域：
+    <input type="hidden" id="txtAreaID" />
+    <input type="text" id="txtAreaName" readonly="readonly" dn="AreaName" />欠费时长：
+	<select id="arrearTime" name="OperatorID">
+        <option value="0,1">不足1一个月</option>
+        <option value="1,3">1-3个月</option>
+        <option value="3,12">3个月-1年</option>
+        <option value="12,">1年以上</option>
+    </select>
+    <a id="btnSearch" href="javascript:void(0)" onclick="GoSearch()" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="ArrearDataTable">
+    <thead>
+        <tr>
+            <th width="10" field="ID" checkbox="true">ID
+            </th>
+            <th width="10" field="NAME">客户名称
+            </th>
+            <th width="10" field="CODE">客户编号
+            </th>
+            <th width="10" field="CONTACTOR">联系人
+            </th>
+            <th width="10" field="PHONE">电话
+            </th>
+            <th width="10" field="MOBILEPHONE">手机
+            </th>
+            <th width="10" field="ADDRESS">地址
+            </th>
+            <th width="10" field="BEGINCHARGEDATE">开始缴费时间
+            </th>
+            <th width="10" field="TYPENAME">客户类型
+            </th>
+            <th width="10" field="AREANAME">所在区域
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<div id="dArea">
+    <table id="areaTreeGrid" class="easyui-treegrid" checkbox="true" url="/System/GetAllAreaJson"
+        idfield="Identifier" treefield="Area_Name" fitcolumns="true">
+        <thead>
+            <tr>
+                <th field="Identifier" checkbox="true" rowspan="2" editor="text">地区码
+                </th>
+                <th field="Area_Name" rowspan="2" width="150" editor="text">地区
+                </th>
+                <th field="ManagerName" rowspan="2" width="50">区域负责人
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!--引用打印模板-->
+@Html.Action("ArrearTipPrint", "print")

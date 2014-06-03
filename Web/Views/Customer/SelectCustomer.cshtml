@@ -1,0 +1,21 @@
+﻿@using Ajax.Model
+@model List<Customer>
+<style type="text/css">
+    .selectCustomer li
+    {
+    	list-style:none;
+    	display:block;
+        float:left;
+        margin:5px;
+        width:120px;
+        border:1px solid #ccc;
+        overflow:hidden;
+    }
+ </style>
+ 快速查询：<input type="text" id="txtCustomerSearch"/>
+<ul class="selectCustomer">
+@foreach (Customer c in Model)
+{ 
+    <li><label><input type="radio" name="selectCustomer" value="@c.ID" code="@c.Code" />@c.Name</label></li>
+}
+</ul>

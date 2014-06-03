@@ -1,0 +1,65 @@
+﻿<script id="ArrearTipModel" type="text/html">
+<div class="Div_SingleArrearMsg">
+    <div style="width: 100%; text-align: center; font-size: 16pt;"><b>环境卫生收费催缴单</b></div>
+    <div style="width: 100%; text-align: right; font-size: 10pt;">客户编号：<%=customer.CODE%></div>
+    <hr />
+    <div style="width: 100%; text-align: left; font-size: 11pt;">
+        <br />
+        <%=customer.NAME%>：
+        <br />
+        <div style="width: 100%; text-align: left; padding-left: 50px;">
+        从 <%=customer.BEGINCHARGEDATE%> 到 @DateTime.Now.ToString("yyyy-MM-dd") 为止您单位已拖欠费卫生费共计<%=totalFee%>元，请及时到环卫处缴纳环卫管理费用！谢谢合作！<br />
+        </div>
+        <div style="width: 100%; text-align: left; font-family: 宋体"><br />
+            <br />
+            缴费明细：<br />
+            <br />
+			<% if(agreements==null){%>
+            <table width="100%" align="center" bordercolor='black' border='1' style="border-collapse: collapse">
+                <thead>
+                    <tr>
+                        <th>收费项名称</th>
+                        <th>收费单价(元)</th>
+                        <th>数量</th>
+                        <th>协议金额</th>
+						<th>月数</th>
+						<th>单项小计</th>
+                    </tr>
+                </thead>
+                <tbody>
+				<%for(var i=0;i<chargeItem.length;i++){%>
+					<tr>
+                        <td><%=chargeItem[i].Name%></td>
+                        <td align="center"><%=chargeItem[i].Price%></td>
+                        <td align="center"><%=chargeItem[i].Count%></td>
+                        <td align="center"><%=chargeItem[i].AgreeMentMoney%></td>
+						<td align="center"><%=monthCount%></td>
+						<td align="center"><%=chargeItem[i].ItemCount%></td>
+					</tr>
+				<%}%>
+				<tr><td colspan='6'>子客户缴费信息：</td></tr>
+				<tr><td colspan='6'>
+					<table width="90%" align="center" bordercolor='black' border='1' style="border-collapse: collapse">
+						<thead><tr><td>子客户名称</td><td>应缴金额</td></tr></thead>
+						<%for(var i=0;i<childrenCustomer.length;i++){%>
+						<td><%=childrenCustomer[i].Name%></td>
+						<td><%=childrenCustomer[i].Fee%></td>
+						<%}%>
+					</table>
+				</td></tr>
+                </tbody>
+				<tfoot><tr><td>总计金额:</td><td colspan='5' align='right'><%=totalFee%></td></tr></tfoot>
+            </table>
+		   <%}else{%>
+			按照协议'<%=agreements.ACODE%>'需要交纳的总金额为<%=agreements.MONEY%>元，还需要交纳费用为<%=totalFee%>元
+		   <%}%>
+        </div>
+        <br />
+        <br />
+        <div style="width: 100%; text-align: right; padding-right: 10px;">五莲环卫管理处<br />
+            <br />
+            @DateTime.Now.ToString("yyyy年MM月dd日")
+        </div>
+    </div>
+</div>
+</script>

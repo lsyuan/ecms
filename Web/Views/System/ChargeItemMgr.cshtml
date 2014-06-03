@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+    ViewBag.Title = "缴费项目管理";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/System/ChargeItemMgr.js")"></script>
+    <style type="text/css">
+        .btnDelPolicy { cursor: pointer; }
+        th { text-align: center; }
+    </style>
+}
+<div class="toolbar" style="display: none">缴费项名称：<input type="text" id="txtSearchdName" />
+    @*单价：<input type="text" id="txtUnitPrice" class="easyui-numberbox" data-options="min:0,precision:2" />*@
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="ChargeItemDataTable">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="Name" width="20%">缴费项目名称</th>
+            <th field="CategoryName" width="10%">所属分类</th>
+            <th field="IsRegular" width="10%">周期性缴费</th>
+            <th field="IsPloy" width="10%">是否可代收费</th>
+            <th field="UnitPrice" align="right" width="10%">单价</th>
+            <th field="Unit" width="40%">单位</th>
+        </tr>
+    </thead>
+</table>
+<!--add dialog begin-->
+<div id="dgChargeItemAddOrEdit" action="#">
+    <form id="frmChargeItem">
+        <input type="hidden" id="ID" name="ID" dn="ID" />
+        <table class="layoutTable">
+            <tr>
+                <td>
+                    <label class="name">名称：</label></td>
+                <td>
+                    <input type="text" id="txtName" dn="Name" maxlength="20" vrequired="t" />
+                    <input type="text" style="display: none" id="txtCode" dn="Code" maxlength="20" />
+                </td>
+                <td>
+                    <label class="name">所属分类：</label></td>
+                <td>
+                    <select id="SelType" dn="CategoryID" jsonurl="/System/GetAllChargeItemCategory"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">计量单位：</label>
+                </td>
+                <td>
+                    <select id="SelUnitID1" dn="UnitID1" jsonurl="/System/GetUnit?level=1"></select>
+                </td>
+                <td>
+                    <label class="name">计时单位：</label>
+                </td>
+                <td>
+                    <select id="SelUnitID2" dn="UnitID2" jsonurl="/System/GetUnit?level=2"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">是否周期性缴费：</label></td>
+                <td>
+                    <select id="SelIsRegular" dn="IsRegular">
+                        <option value="1" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="name">是否可按协议缴费：</label></td>
+                <td>
+                    <select id="SelIsAgreeMent" dn="IsAgreeMent">
+                        <option value="1" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">是否可代收费：</label></td>
+                <td>
+                    <select id="SelIsPloy" dn="IsPloy">
+                        <option value="1" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="name">单价(元)：</label></td>
+                <td>
+                    <input type="text" id="UnitPrice" dn="UnitPrice" class="easyui-numberbox" data-options="min:0,precision:2" vrequired="t" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<!--add dialog end-->
+<!--Policy dialog begin-->
+<div id="dgPolicy">当<input type="text" id="txtBegin" style="width: 100px;" disabled="disabled" value="0.00" vrequired="t" />-
+    <input type="text" id="txtEnd" style="width: 100px;" class="easyui-numberbox" data-options="min:0,precision:2" />时
+    <input type="text" id="txtPrice" style="width: 100px;" class="easyui-numberbox" data-options="min:0,precision:2" vrequired="t" />￥
+    <a id="btnAddPolicy" href="javascript:void(0)" class="easyui-linkbutton" icon="icon-add">添加策略</a>
+    <table class="EditTable" id="policyTable" style="width: 100%">
+        <thead>
+            <tr>
+                <th>下限</th>
+                <th>上限</th>
+                <th>单价(元)</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<!--Policy dialog end-->

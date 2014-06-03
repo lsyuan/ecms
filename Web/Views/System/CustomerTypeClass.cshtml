@@ -1,0 +1,40 @@
+﻿@{
+	ViewBag.Title = "客户类型管理";
+	Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+	<script type="text/javascript" src="@Url.Content("~/Scripts/js/System/CustomerTypeClass.js")"></script>
+}
+<div class="Bar" style="display: none">
+	<input type="text" id="txtCustomerTypeName" />
+	<a id="btnSearch" href="javascript:void(0)" class="easyui-linkbutton" icon="icon-search">查询</a>
+</div>
+<table id="CustomerTypeDataTable">
+	<thead>
+		<tr>
+			<th field="ID" checkbox="true">ID</th>
+			<th field="NAME" width="100%">客户类型名称</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>
+<!--dialog begin-->
+<div id="dgAddNew" title="新增客户类型" action="#">
+	<form id="frmAddNewCustomerType">
+		<table class="layoutTable">
+			<tr>
+				<td style="width: 30%">
+					<input type="hidden" id="CIID" name="ID" value="" dn="ID" />
+					<label class="name">名称:</label>
+				</td>
+				<td>
+					<input type="text" name="Name" dn="NAME" id="Name" vrequired="t" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="dgModifyChargeItem">
+	@Html.Action("SelectChargeItemByType", "Charge")
+</div>
+<!--dialog end-->

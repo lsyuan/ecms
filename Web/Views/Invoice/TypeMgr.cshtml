@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "票据分类管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/Invoice/TypeMgr.js")"></script>
+}
+
+<table id="gridInvoiceType">
+ <thead>  
+        <tr>  
+            <th field="ID" checkbox="true" width="30">选择</th>  
+            <th field="Name" width="70">票据类型名称</th>  
+            <th field="Standard" width="100">执行收费标准</th>  
+            <th field="Code" width="70">发票代码</th>
+            <th field="StepValue" width="70">号码增量</th>
+        </tr>  
+  </thead>  
+</table> 
+<!--dialog begin-->
+<div id="dgAddorEdit">
+<input type="hidden" id="ID" dn="ID"/>
+<table class="layoutTable">
+    <tr><td>票据类型名称</td><td><input type="text" id="txtInvoiceTypeName" dn="Name" vRequired="t"/></td></tr>
+    <tr><td>执行收费标准</td><td><input type="text" id="txtStandard" dn="Standard" vRequired="t"/></td></tr>
+    <tr><td>发票代码</td><td><input type="text" id="txtCode" dn="Code" vRequired="t"/></td></tr>
+    <tr><td>号码增量</td><td><input type="text" class="easyui-numberbox" data-options="min:0,precision:0" id="txtStepValue" dn="StepValue" vRequired="t"/></td></tr>
+</table>
+</div>
+<!--dialog end-->

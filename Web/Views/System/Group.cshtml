@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "系统角色管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/System/Group.js")"></script>
+    <style type="text/css">
+        .pagination-page-list { width: 50px; }
+    </style>
+}
+<div style="float: left; width: 44%; overflow-y: scroll; height: 600px;">
+    <table id="GroupDataTable">
+        <thead>
+            <th field="ID" checkbox="true" width="10px">全选</th>
+            <th field="NAME" width="40px">角色名</th>
+            <th field="DETAIL" width="40px">权限设置</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div style="float: right; width: 55%; bottom: 0px; overflow-y: scroll; height: 600px">
+    <table id="VoteDataTable">
+        <thead>
+            <th field="Name" width="250">权限名称</th>
+            <th field="Vote1" width="50">增</th>
+            <th field="Vote2" width="50">删</th>
+            <th field="Vote3" width="50">查</th>
+            <th field="Vote4" width="50">改</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div style="clear: both;"></div>
+<!--Add begin-->
+<div id="dgAddOrEditGroup" action="#">
+    <form id="frmAddOrEditGroup">
+        <input type="hidden" id="ID" dn="ID" />
+        <table border="0" cellpadding="0" cellspacing="0" class="layoutTable">
+            <tr>
+                <td style="width: 40%;">
+                    <label class="name">角色名称：</label></td>
+                <td>
+                    <input type="text" dn="Name" id="GroupName" vrequired="t" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!--Add end-->

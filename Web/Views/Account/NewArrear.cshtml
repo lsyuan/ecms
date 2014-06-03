@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "期初欠费";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Account/NewArrear.js")"></script>
+}
+<div class="toolbar" id="SearchToolBar">客户名称：<input type="text" id="txtCustomer" />
+    状态：<select id="dpStatus" onchange="hideButton()"><option value="-1">全部</option>
+        <option value="0">未缴费</option>
+        <option value="1">待审核</option>
+        <option value="2">已缴费</option>
+        <option value="3">已删除</option>
+        <option value="4">已作废</option>
+    </select>
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+    <a id="btnAddNew" href="javascript:void(0)" class="web_button">新增欠费</a>
+</div>
+<table id="gridFirstMoney" >
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="Name" width="70">客户名称</th>
+            <th field="Money" width="100">欠费金额</th>
+            <th field="Status" width="70">处理状态</th>
+            <th field="ChargeDate" width="70">缴费时间</th>
+        </tr>
+    </thead>
+</table>
+<!--addorEdit Dialog-->
+<div id="dgAddorEdit">
+    <input type="hidden" id="ID" dn="ID" />
+    <table class="layoutTable">
+        <tr>
+            <td>客户名称</td>
+            <td>
+                <input type="text" id="txtCustomerName" vrequired="t" /></td>
+        </tr>
+        <tr>
+            <td>欠费金额</td>
+            <td>
+                <input type="text" class="easyui-numberbox" id="txtMoney" data-options="min:0,precision:2" vrequired="t" /></td>
+        </tr>
+        <tr>
+            <td>欠费年份</td>
+            <td>
+                <select id="dpYear">
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                </select>
+                @*<input type="text" class="easyui-numberbox" id="txtYear" data-options="min:0,precision:0" vrequired="t" />*@</td>
+        </tr>
+    </table>
+</div>

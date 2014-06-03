@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "登录日志维护";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/System/LoginLog.js")"></script>
+}
+<div class="toolbar">操作员<input type="text" id="OperatorID" />
+    操作日期<input type="text" id="startDate" class="easyui-datebox" />至<input type="text" id="endDate" class="easyui-datebox" />
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="dgLoginLog" style="height: 400px;">
+    <thead>
+        <tr>
+            @*<th field="ID" checkbox="true" width="30">选择</th>  *@
+            <th field="OperatorName" width="100">登录ID</th>
+            <th field="oprname" width="120">职工</th>
+            <th field="Type" width="70">操作类型</th>
+            <th field="CreateTime" width="120">操作日期</th>
+        </tr>
+    </thead>
+</table>

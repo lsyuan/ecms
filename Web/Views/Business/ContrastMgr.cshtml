@@ -1,0 +1,85 @@
+﻿@{
+	ViewBag.Title = "客户协议管理";
+	Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+	<script type="text/javascript" src="@Url.Content("~/Scripts/js/Business/ContrastMgr.js")"></script>
+	<style type="text/css">
+		#dgSelectCustomer { text-align: left; }
+		#Remark{height:40px;width:450px;}
+	</style>
+}
+<div id="toolbar" class="toolbar" action="#">协议编号：<input type="text" id="txtContrastID" dn="ID" />
+	客户名称：<input type="text" id="txtCustomerName" dn="Name" />
+	协议状态：
+	<select id="dpStatus" dn="Status" onchange="hideButton()">
+		<option value="0">未审批</option>
+		<option value="1">已审批</option>
+		<option value="2">已删除</option>
+		<option value="3">已过期</option>
+	</select>
+	<a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="AgreeDataTable">
+	<thead>
+		<tr>
+			<th width="3" field="ID" checkbox="true">ID</th>
+			<th width="10" field="AGREEMENTCODE">协议编号</th>
+			<th width="10" field="CODE">客户编号</th>
+			<th width="10" field="NAME">客户名称</th>
+			<th width="10" field="MONEY">协议金额</th>
+			<th width="10" field="STATUS">协议状态</th>
+			<th width="10" field="ENDDATE">协议截止日期</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>
+<!--add or edit dialog begin-->
+<div id="dgAddAgree" action="#">
+	<table id="tableLayout" class="layoutTable">
+		<tr>
+			<td>
+				<label class="name">协议编号：</label></td>
+			<td>
+				<input type="text" id="ID" dn="Code" class="easyui-numberbox" vrequired="t" /></td>
+			<td>
+				<label class="name">协议状态：</label></td>
+			<td>
+				<select id="Status" dn="Status">
+					<option value="">全部</option>
+					<option value="0" selected="selected">未审批</option>
+					<option value="1">已审批</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">客户名称：</label></td>
+			<td>
+				<input type="text" id="customerSelect" vrequired="t" />
+				<input type="hidden" dn="CustomerID" id="CustomerID" />
+			</td>
+			<td>
+				<label class="name">协议金额：</label></td>
+			<td>
+				<input type="text" dn="Money" id="Money" class="easyui-numberbox" data-options="min:0,precision:2" vrequired="t" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">协议开始：</label></td>
+			<td>
+				<input id="BeginDate" dn="BeginDate" class="easyui-datebox" vrequired="t" />
+			</td>
+			<td>
+				<label class="name">协议结束：</label></td>
+			<td>
+				<input id="EndDate" dn="EndDate" class="easyui-datebox" vrequired="t" />
+			</td>
+		</tr>
+		<tr>
+			<td><label class="name">协议备注：</label></td>
+			<td colspan="3"><textarea id="Remark" dn="Remark"></textarea></td>
+		</tr>
+	</table>
+</div>
+<!--add or edit dialog end-->

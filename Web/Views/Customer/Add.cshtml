@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "新增客户";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Customer/CustomerAdd.js")"></script>
+    <style type="text/css">
+        tbody tr td { padding-left:4px; padding-right:4px; }
+    </style>
+}
+<div id="dgEdit" action="#">
+    <form id="frmCustomer">
+        <table class="layoutTable">
+            <tr>
+                <td style="text-align: right; width: 30%;">
+                    <label class="name">客户编号:</label></td>
+                <td style="color: Gray; width: 20%;">
+                    <input type="text" disabled="disabled" style="background-color: #F0F0F0" /></td>
+                <td style="text-align: right; width: 10%;">
+                    <label class="name">客户名称:</label></td>
+                <td style="width: 40%;">
+                    <input type="hidden" id="txtID" name="ID" dn="ID" />
+                    <input type="text" id="Cname" dn="Name" vrequired="t" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">联系人:</label>
+                </td>
+                <td>
+                    <input type="text" id="Lname" dn="Contactor" vrequired="t" /></td>
+                <td>
+                    <label class="name">联系电话:</label></td>
+                <td>
+                    <input type="text" id="PHONE" dn="Phone" class="easyui-numberbox" vrequired="t" data-options="min:0,precision:0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">手机:</label></td>
+                <td>
+                    <input type="text" id="MobilePhone" dn="MobilePhone" class="easyui-numberbox" />
+                </td>
+                <td>
+                    <label class="name">客户类型:</label>
+                </td>
+                <td>
+                    <select id="dpCustomerType" jsonurl='/Customer/CustomerAllTypeJson' dn="CustomerTypeID"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">所在区域:</label>
+                </td>
+                <td>
+                    <input type="hidden" id="txtAreaID" dn="AreaID" />
+                    <input type="text" id="txtAreaName" vrequired="t" readonly="readonly" dn="AreaName" />
+                </td>
+                <td>
+                    <label class="name">负责人:</label>
+                </td>
+                <td>
+                    <input type="text" id="txtManager" style="width: 144px;" dn="OperatorName" />
+                    <input type="hidden" id="txtManagerID" dn="ManagerID" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">代缴费权限:</label></td>
+                <td>
+                    <select id="dpAgent" name="Agent" dn="Agent">
+                        <option value="0">无</option>
+                        <option value="1">有</option>
+                    </select>
+                </td>
+                <td>
+                    <label class="name" id="lblParent">父客户:</label></td>
+                <td>
+                    <input type="hidden" id="txtParentID" />
+                    <input type="text" id="txtParentName" style="width: 155px;" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="name">地址:</label></td>
+                <td>
+                    <input type="text" id="ADDRESS" dn="Address" /></td> 
+                <td>
+                    <label class="name">开始缴费时间:</label></td>
+                <td>
+                    <input type="text" id="BeginChargeDate" dn="BeginChargeDate" /></td>
+            </tr>
+        </table>
+
+        <!--对应缴费项设置-->
+        <table id="tableChargeItem" class="datagrid-htable" style="margin: 0 auto; padding-left: 2px; padding-right: 2px; width: 100%">
+            <thead style="background-color: #d3d3d4">
+                <tr>
+                    <th>收费项名称</th>
+                    <th>收费单价</th>
+                    <th>收费单位</th>
+                    <th>周期性收费</th>
+                    <th>能否按协议</th>
+                    <th>数量</th>
+                    <th>单项金额</th>
+                    <th>协议金额</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8" align="left" style="padding-left: 10px">缴费项总数：<label id="lblFeeItemCount">0</label>
+                        一次性缴费总数：<label id="lblFeeCount">0</label></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div style="text-align: center; margin: auto;">
+            <br />
+            @*<a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton" icon="icon-save">保存</a>*@
+            <a id="btnSave" class="web_button" href="javascript:void(0)">保&nbsp;&nbsp;&nbsp;&nbsp;存</a>
+        </div>
+    </form>
+</div>
+<!--地区选择框dialog begin-->
+<div id="dArea">
+    <table id="areaTreeGrid" class="easyui-treegrid" checkbox="true" url="/System/GetAllAreaJson" idfield="Identifier" treefield="Area_Name" fitcolumns="true">
+        <thead>
+            <tr>
+                <th field="Identifier" checkbox="true" rowspan="2" editor="text">地区码</th>
+                <th field="Area_Name" rowspan="2" width="150" editor="text">地区</th>
+                <th field="ManagerName" rowspan="2" width="50">区域负责人</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!--地区选择框dialog end-->
+<!--选择父级客户begin-->
+<div id="dgParent">
+    @Html.Action("SelectCustomer", "Customer")
+</div>
+<!--选择父级客户end-->

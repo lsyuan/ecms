@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "区域设置";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script src="../../Scripts/js/System/AreaMgr.js" type="text/javascript"></script>
+}
+<div class="toolbar">
+    <a id="btnAdd" href="javascript:void(0)" class="web_button">新&nbsp;&nbsp;&nbsp;&nbsp;增</a>
+    <a id="btnModify" href="javascript:void(0)" class="web_button">修&nbsp;&nbsp;&nbsp;&nbsp;改</a>
+    <a id="btnDelete" href="javascript:void(0)" class="web_button">删&nbsp;&nbsp;&nbsp;&nbsp;除</a>
+</div>
+<table id="areaTreeGrid" class="easyui-treegrid" checkbox="true" url="/System/GetAllAreaJson" idfield="Identifier" treefield="Area_Name" fitcolumns="true">
+    <thead>
+        <tr>
+            <th field="Identifier" checkbox="true" rowspan="2" width="20px" editor="text">选择</th>
+            <th field="Area_Name" rowspan="2" width="150px" editor="text">区域名称</th>
+            <th field="ManagerName" width="100px">区域负责人</th>
+        </tr>
+    </thead>
+</table>
+<!--新增or编辑窗口 begin-->
+<div id="dgAddOrEdit">
+	<input type="hidden" id="txtAreaID" name="ID" dn="ID" />
+    <table class="layoutTable">
+        <tr>
+            <td style="width: 40%">
+                <label class="name">父节点：</label></td>
+            <td>
+                <input type="hidden" id="txtPID"  dn="PID" />
+                <input type="text" id="txtName"  disabled="disabled" title="为空时添加到根目录" /></td>
+        </tr>
+        <tr>
+            <td style="width: 40%">
+                <label class="name">地区名称：</label></td>
+            <td>
+                <input type="text" id="txtAreaName"  dn="Name" vrequired="t" /></td>
+        </tr>
+        <tr>
+            <td style="width: 40%">
+                <label class="name">区域负责人：</label></td>
+            <td>
+				<input type="hidden" id="txtEmpID" dn="Manager"/>
+                <input type="text" id="txtManager"   vrequired="t" /></td>
+        </tr>
+    </table>
+</div>
+<!--新增or编辑窗口 end-->

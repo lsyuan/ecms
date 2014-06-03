@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "票据登记管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+     <script type="text/javascript" src="@Url.Content("~/Scripts/js/Invoice/Index.js")"></script>
+}
+<div class="toolbar" id="SearchToolBar">
+票据类型：<select id="dpInvoiceTypeSearch" ><option value="">全部</option></select>
+<a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="gridInvoice">
+ <thead>  
+        <tr>  
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="BeginCode" width="70">起始编号</th>  
+            <th field="EndCode" width="100">结束编号</th>
+            <th field="OperatorName" width="100">登记人</th>
+            <th field="CurrentCode" width="100">当前使用编号</th>   
+            <th field="UseStatus" width="70">使用状态</th>  
+            <th field="InvoiceTypeName" width="100">票据类型</th>  
+        </tr>  
+  </thead>  
+</table> 
+<!--addOrEdit dialog-->
+<div id="dgAddorEdit">
+    <input type="hidden" id="ID" dn="ID"/>
+    <table class="layoutTable">
+    <tr><td>票据类型</td><td><select id="dpInvoiceType" dn="InvoiceType"  vRequired="t" /></td></tr>
+    <tr><td>票据编号起</td><td><input type="text" id="txtBeginCode" dn="BeginCode" vRequired="t" /></td></tr>
+    <tr><td>票据编号止</td><td><input type="text" id="txtEndCode" dn="EndCode" vRequired="t" /></td></tr>
+    </table>
+</div>

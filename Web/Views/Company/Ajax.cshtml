@@ -1,0 +1,141 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="@Url.Content("~/Scripts/jquery.JsonData.js")" type="text/javascript"></script>
+	<script language="javascript" type="text/javascript">
+
+		$(document).ready(function () {
+			$.ajax({
+				url: "GetName",
+				success: function (data) {
+					$("#tb_customerName").autocomplete({ source: data });
+				},
+				error: function ()
+				{ }
+			});
+			$.ajax({
+				url: "GetOneCompany",
+				success: function (data) {
+					$("#CompanyDIV").JsonData(data);
+				},
+				error: function ()
+				{ ShowMessage("Error"); }
+			});
+			$("#datepicker").datepicker();
+			$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+			$('#myDataTable').dataTable({
+				"bProcessing": true,
+				"bLengthChange": true,
+				"bFilter": true,
+				"bServerSide": true,
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers",
+				"sAjaxSource": 'AjaxDataProvider',
+				"aoColumns": [
+                                    { "sName": "ID",
+                                    	"bSearchable": false,
+                                    	"bSortable": false,
+                                    	"bVisible": false
+                                    },
+			                        { "sName": "COMPANY_NAME" },
+			                        { "sName": "ADDRESS" },
+			                        { "sName": "TOWN" }
+		                      ]
+			}).makeEditable();
+		});
+		function ShowData() {
+			var data = $("#CompanyDIV").JsonData();
+			ShowMessage("Name:" + data.Name + "Handel:" + data.Handel);
+		}
+	</script>
+	<style type="text/css">
+		/*demo page css*/
+		body { font: 75% "Verdana"; margin: 50px; }
+		.demoHeaders { margin-top: 2em; }
+		#dialog_link { padding: .4em 1em .4em 20px; text-decoration: none; position: relative; }
+		#dialog_link span.ui-icon { margin: 0 5px 0 0; position: absolute; left: .2em; top: 50%; margin-top: -8px; }
+		ul#icons { margin: 0; padding: 0; }
+		ul#icons li { margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left; list-style: none; }
+		ul#icons span.ui-icon { float: left; margin: 0 4px; }
+	</style>
+}
+<div id="demo">
+	<script>
+		$(function () {
+			//			$("#btnAddNewRow").button();
+			//			$("#btnDeleteRow,#showMsg").button();
+		});
+	</script>
+	<button id="btnAddNewRow" class="ui-button" value="Ok">新增</button>
+	<button id="btnDeleteRow" class="ui-button" value="cancel">删除</button>
+	<button id="showMsg" value="ShowMsg" onclick="ShowMessage('没有选择任何行！');">显示消息</button>
+	<button id="ShowData" value="ShowData" onclick="ShowData()">显示Json数据</button>
+	@*<p>Date:
+		<input id="datepicker" type="text"></p>*@
+	<br />
+	<br />
+	<p>客户名称:<input type="text" name="customername" id="tb_customerName" value="" />自动完成</p>
+	<div id="CompanyDIV">Name:<input type="text" id="Name" name="Name" dn="Name" />Handel:<input type="text" id="Handel" name="Name" dn="Handel" />
+	</div>
+</div>
+@*<br />*@
+<table id="myDataTable" class="display" style="width: 100%">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>公司名称</th>
+			<th>公司地址</th>
+			<th>所在城市</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>
+<br />
+<div style="display: block; outline: 0px none; position: absolute; height: 160.933px; width: 361.933px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog">
+	<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+		<span class="ui-dialog-title" id="ui-dialog-title-dialog">基本数据显示框</span></div>
+	<div id="dialog" class="ui-dialog-content ui-widget-content" style="width: 340px; min-height: 112.067px; height: 124px;" scrolltop="0" scrollleft="0">
+		<p>基本数据显示框. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+	</div>
+</div>
+<div id="formAddNewRow" action="#" style="display: none;" title="新增公司信息">
+	<input type="hidden" id="id" name="id" value="-1" rel="0" />
+	<table border="0" cellpadding="0" cellspacing="0" class="EditTable">
+		<tr>
+			<td>
+				<label class="name">Name</label></td>
+			<td>
+				<input type="text" name="name" id="name" class="required" rel="1" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">Address</label></td>
+			<td>
+				<input type="text" name="address" id="address" rel="2" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">Postcode</label></td>
+			<td>
+				<input type="text" name="postcode" id="postcode" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">Town</label></td>
+			<td>
+				<input type="text" name="town" id="town" rel="3" /></td>
+		</tr>
+		<tr>
+			<td>
+				<label class="name">Country</label></td>
+			<td>
+				<select name="country" id="country">
+					<option value="1">Serbia</option>
+					<option value="2">France</option>
+					<option value="3">Italy</option>
+				</select></td>
+		</tr>
+	</table>
+</div>

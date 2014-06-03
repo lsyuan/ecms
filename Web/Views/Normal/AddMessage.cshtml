@@ -1,0 +1,77 @@
+﻿@using Ajax.Model;
+@{
+    OperatorMsg msg = ViewBag.Msg as OperatorMsg;
+    ViewBag.Title = string.IsNullOrEmpty(msg.ID) ? "新发公告" : "编辑公告";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="../../Scripts/js/Normal/AddMessage.js"></script>
+    <script type="text/javascript" src="../../Scripts/kindeditor-min.js"></script>
+    <script type="text/javascript" src="../../Scripts/lang/kindeditor_zh_cn.js"></script>
+    <link rel="stylesheet" href="../Content/css/kindeditor_default/default.css" />
+    <style type="text/css">
+        #btnMsgTo { cursor: pointer; color: Blue; }
+    </style>
+
+    <script type="text/javascript">
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="Content"]', {
+                resizeType: 1,
+                allowPreviewEmoticons: false,
+                allowImageUpload: false,
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|']
+                //, 'emoticons', 'image', 'link'
+            });
+        });
+
+
+    </script>
+}
+<form id="frmAddMsg" name="frmAddMsg" method="post" action="/Normal/AddMessageNew">
+    <table class="layoutTable" style="width: 100%; margin: 0 auto;">
+        <tr>
+            <td style="width: 30%;">
+                <label class="name">接收人：</label></td>
+            <td align="left">
+                <input type="text" id="txtAccept" name="Accept" readonly="readonly" style="width: 200px; text-align:left;" />
+                <input type="hidden" id="txtAcceptIDs" name="txtAcceptIDs" value="" dn="AcceptIDS" />
+                <span id="btnMsgTo">指定接收人</span>(注：不填默认为所有人可见)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">公告标题：</label></td>
+            <td align="left">
+                <input type="text" id="txtTitle" name="Title" vrequired="t" dn="Title" style="width: 200px;" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">公告内容：</label></td>
+            <td align="left">
+                <textarea id="txtContent" name="Content" cols="60" dn="Content" rows="10" vrequired="t"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a id="btnSubmit" href="javascript:void(0)" class="web_button">确&nbsp;&nbsp;&nbsp;&nbsp;定</a></td>
+        </tr>
+    </table>
+
+    <!--dialog begin-->
+    <div id="dgAcceptUser">
+        @{
+            List<Operator> list = ViewBag.operatorList as List<Operator>;
+            foreach (Operator op in list)
+            {
+            <label>
+                <input type="checkbox" name="chkAccept" value="@op.ID" />@op.Name</label><br />
+            }
+        }
+    </div>
+    <!--dialog end-->
+</form>
+<input type="hidden" id="tipMsg" value="@TempData["tipMsg"].ToString()" />

@@ -1,0 +1,23 @@
+﻿<table class="easyui-datagrid">
+<thead>
+<tr>
+<th data-options="field:'ID'">选择</th>
+<th data-options="field:'CHARGENAME'">缴费项</th>
+<th data-options="field:'CHARGETYPENAME'">所属分类</th>
+<th data-options="field:'UNITPRICE'">单价(元)</th>
+<th data-options="field:'UNITNAME'">单位</th>
+</tr>
+</thead>
+<tbody>
+@foreach (var ItemObj in ViewBag.ChargeItemList)
+{
+<tr>
+	<td><input type="checkbox" name="chkChargeItem" id="@ItemObj.ID" value="@ItemObj.ID" /> </td>
+	<td>@ItemObj.CHARGENAME</td>
+	<td>@ItemObj.CHARGETYPENAME</td>
+	<td>@ItemObj.UNITPRICE</td>
+	<td>@ItemObj.UNITNAME</td>
+</tr>
+}
+</tbody>
+</table>

@@ -1,0 +1,8 @@
+﻿@using Ajax.Model
+@model  List<Group>
+<ul class="selectGroup">
+@foreach (Group g in Model)
+{ 
+    <li><label><input type="radio" name="selectGroup" value="@g.ID" />@g.NAME</label></li>
+}
+</ul>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><title>系统 </title>
+    <link href="@Url.Content("~/Content/css/EasyUICss/easyui.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #accordionDiv li { list-style: none; background: url("../../Content/images/EasyUIImages/tree_file.gif") no-repeat left center; padding-left: 20px; margin-left: -16px; }
+            #accordionDiv li a { text-decoration: none; display: block; margin-bottom: 5px; }
+                #accordionDiv li a:hover { display: block; background-color: #c0c0c0; }
+
+        .panel-tool a { display: inline-block; width: 160px; height: 24px; opacity: 0.6; filter: alpha(opacity=60); margin-left: 2px; }
+        .float_left { text-align: left; height: 90px; width: 690px; float: left; }
+        .float_right1 { text-align: right; height: 90px; width: 95px; float: right; }
+        .float_right2 { width: 207px; top: 0px; right: 5px; height: 90px; position: absolute; background: url('../../Content/images/city_02.png'); background-repeat: no-repeat; }
+        a.destop { height: 27px; width: 27px; top: 57px; right: 35px; position: absolute; background: url('../../Content/images/destop.png'); background-repeat: no-repeat; }
+        a.loginOut { height: 27px; width: 27px; top: 57px; right: 5px; position: absolute; background: url('../../Content/images/logOut_active.png'); background-repeat: no-repeat; }
+        a:hover.loginOut { height: 27px; width: 27px; top: 57px; right: 5px; position: absolute; background: url('../../Content/images/logOut_inactive.png'); background-repeat: no-repeat; }
+        #userInfo { position: absolute; right: 250px; top: 70px; }
+    </style>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.easyui.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Home/Index.js")"></script>
+</head>
+<body class="easyui-layout">
+    <!--top begin-->
+    <div region="north" split="false" style="height: 92px; background: url('../../Content/images/logo_02.jpg'); background-repeat: repeat-x; background-position: center">
+        <div class='float_left' style="height: 90px; background-position: left center; background: url('../../Content/images/logo_01.jpg'); background-repeat: no-repeat;"></div>
+        <div class='float_right1' style="height: 90px; background: url('../../Content/images/logo_03.jpg'); background-repeat: no-repeat;"></div>
+        <div class='float_right2'>
+            <a href="/System/Tipmsg" target="frmMain" class="destop" onclick="" title="返回桌面"></a>
+            <a href="#" class="loginOut" onclick="loginOut()" title="注销登录"></a>
+        </div>
+        <div id="userInfo" style="color: white; font-size: 11pt; position: absolute; top: 60px; right: 80px; height: 90px; font-family: 'Microsoft YaHei'; padding-bottom: 8px;">当前用户：<b>@ViewData["userName"]</b>&nbsp;&nbsp;&nbsp;角色：<b>@ViewData["groupName"]</b></div>
+        @*<iframe src="http://m.weather.com.cn/m/pn12/weather.htm?id=101121502T " allowtransparency="true" style="width:245px;height:80px;background-color:transparent;float:right;right:0px;*position:absolute;" frameborder="0" scrolling="no"></iframe>*@
+    </div>
+    <!--top end-->
+    <!--left begin-->
+    <div region="west" title="" style="width: 164px; font-size: 14px; font-family: 'Microsoft YaHei',Arial;">
+        <div id="accordionDiv" class="easyui-accordion" fit="true"></div>
+    </div>
+    <!--left end-->
+    <!--main begin-->
+    <div region="center" split="true">@*<iframe id="frmMain" name="frmMain" src="" frameborder='0' style="height:100%;width:100%;"></iframe>*@
+        <iframe id="frmMain" name="frmMain" src="" frameborder='0' style="height: 99%; width: 100%;"></iframe>
+    </div>
+    <!--main end-->
+    <!--foot begin-->
+    <div region="south" split="false" style="hegiht: 50px; text-align: right; font-weight: bolder;">软件当前版本V1.3.2</div>
+    <!--foot end-->
+</body>
+</html>

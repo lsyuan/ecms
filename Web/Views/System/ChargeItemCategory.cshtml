@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "收费项分类管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/System/ChargeItemType.js")"></script>
+}
+
+<table id="ChargeItemTypeDataTable">
+    <thead>
+        <th field="ID" checkbox="true" width="10">全选</th>
+        <th field="NAME" width="100">分类名称</th>
+    </thead>
+    <tbody></tbody>
+</table>
+<!--Add begin-->
+<div id="dgAddOrEditChargeItemType" action="#">
+    <form id="frmAddOrEditChargeItemType">
+        <table class="layoutTable">
+            <tr>
+                <td style="width: 40%;">
+                    <label class="name">收费项分类名：</label><input type="hidden" id="ID" dn="ID" />
+                </td>
+                <td>
+                    <input type="text" dn="Name" id="ChargeItemTypeName" vRequired="t"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

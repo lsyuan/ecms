@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "其他缴费";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Aid/AnotherCharge.js")"></script>
+}
+<div class="toolbar">客户名称:<input type="text" id="CustomerNameSearch" />
+    缴费时间:<input id="CreateTimeSearch" type="text" class="easyui-datebox" />
+    <a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="gridOtherCharge">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="CustomerName" width="100">客户名称</th>
+            <th field="Money" width="100">应缴金额</th>
+            <th field="ActMoney" width="100">实缴金额</th>
+            <th field="ChargeDate" width="100">缴费时间</th>
+            <th field="OperatorName" width="100">操作人员</th>
+        </tr>
+    </thead>
+</table>
+
+<!--dialog begin-->
+<div id="dgOtherCharge">
+    <table class="layoutTable" style="margin: 0 auto;">
+        <tr>
+            <td style="width: 15%;">
+                <label class="name">客户名称：</label></td>
+            <td style="width: 35%;">
+                <input type="text" dn="CustomerName" id="CustomerName" vrequired="t" /></td>
+            <td style="width: 15%;">
+                <label class="name">收费名称：</label></td>
+            <td>
+                <input type="text" dn="ChargeName" id="ChargeName" vrequired="t" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">应缴金额：</label></td>
+            <td>
+                <input type="text" id="txtGiveChange" dn="Money" class="easyui-numberbox" data-options="min:0,precision:2" vrequired="t" />￥</td>
+            <td>
+                <label class="name">实缴金额：</label></td>
+            <td>
+                <input type="text" id="txtFee" class="easyui-numberbox" vrequired="t" dn="ActMoney" data-options="min:0,precision:2" />￥
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">备注：</label></td>
+            <td colspan="3">
+                <textarea style="width: 95%" cols="1" dn="Remark" rows="3"></textarea></td> 
+        </tr>
+    </table>
+</div>
+<!--dialog end-->

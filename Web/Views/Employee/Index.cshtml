@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "职员管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script src="@Url.Content("~/Scripts/js/Employee/Employee.js")" type="text/javascript"></script>
+}
+
+<div class="toolbar">姓名:<input type="text" name="Name" id="txtEmployeeName" />
+    <a id="btnQuery" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+</div>
+<table id="gridEmployee" style="height:400px;">
+    <thead>
+        <tr>
+            <th field="ID" checkbox="true" width="30">选择</th>
+            <th field="NAME" width="70">姓名</th>
+            <th field="SEX" width="100">性别</th>
+            <th field="BIRTHDATE" width="100">出生日期</th>
+            <th field="CARDID" width="100">身份证号</th>
+            <th field="ADDRESS" width="100">地址</th>
+            <th field="OfficePhone" width="100">电话号码</th>
+            <th field="DEPTNAME" width="100">所在部门</th>
+            <th field="CURRENTSTATUS" width="100">在职状态</th>
+        </tr>
+    </thead>
+</table>
+<!--add begin-->
+<div id="dgAdd" action="#">
+    <table class="layoutTable">
+        <tr>
+            <td>
+                <input type="hidden" name="ID" id="EID" dn="ID" value="" />
+                <label class="name">职工姓名：</label></td>
+            <td>
+                <input type="text" name="name" dn="name" id="name" vrequired="t" /></td>
+            <td>
+                <label class="name">性别：</label></td>
+            <td>
+                <select dn="Sex" id="Sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">出生日期：</label></td>
+            <td>
+                <input type="text" name="BirthDate" dn="BirthDate" id="BirthDate" class="easyui-datebox" /></td>
+            <td>
+                <label class="name">部门：</label></td>
+            <td>
+                <input type="text" id="DeptName" />
+                <input type="hidden" id="txtDeptID" dn="DeptID" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">职务：</label></td>
+            <td>
+                <select id="Job" dn="Job">
+                    <option value="清洁工">清洁工</option>
+                    <option value="信息管理员">信息管理员</option>
+                    <option value="收费员">收费员</option>
+                </select></td>
+            <td>
+                <label class="name">身份证号：</label></td>
+            <td>
+                <input type="text" name="CardID" id="CardID" dn="ICCardID" vrequired="t" class="easyui-numberbox" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">地址：</label></td>
+            <td>
+                <input type="text" name="Address" id="Address" dn="Address" /></td>
+            <td>
+                <label class="name">办公电话：</label></td>
+            <td>
+                <input type="text" name="OfficePhone" id="OfficePhone" dn="OfficePhone" class="easyui-numberbox" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">入职时间：</label></td>
+            <td>
+                <input type="text" name="WorkTime" id="WorkTime" class="easyui-datebox" dn="WorkTime" /></td>
+            <td>
+                <label class="name">解雇日期：</label></td>
+            <td>
+                <input type="text" name="FireTime" id="FireTime" class="easyui-datebox" dn="FireTime" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">状态：</label></td>
+            <td colspan="3">
+                <select id="CurrentStatus" dn="CurrentStatus">
+                    <option value="在职">在职</option>
+                    <option value="离职">离职</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" id="txtStatus" dn="Status" />
+</div>
+<!--dialog 部门选择begin-->
+<div id="dgDept">
+    <table id="deptTreeGrid" class="easyui-treegrid" style="width: 430px;" checkbox="true" url="/Dept/GetAllDeptJson" idfield="Identifier" treefield="Dept_Name" fitcolumns="true">
+        <thead>
+            <tr>
+                <th field="Identifier" checkbox="true" rowspan="2" width="20px" editor="text">选择</th>
+                <th field="Dept_Name" rowspan="2" width="150px" editor="text">部门名称</th>
+                <th field="Dept_Status" rowspan="2" width="70px" editor="text">部门状态</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<!--dialog 部门选择end-->

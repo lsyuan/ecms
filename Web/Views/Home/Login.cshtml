@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head{
+    <style type="text/css">
+        body { background-image: url("../../Content/images/small_bg.png"); }
+        .tableLogin { font-family: Verdana; color: white; font-weight: bolder; width: 762px; font-size: 16px; font-family: 'Microsoft YaHei'; }
+            .tableLogin tr { height: 50px; }
+        #loginForm { padding-top: 150px; margin: 0 auto; margin-top: 120px; width: 762px; height: 300px; @*background-image: url("../../Content/images/loginFormBg.png"); *@background-repeat: no-repeat; }
+        #btnLogin { width: 139px; height: 40px; margin-left: 90px; cursor: pointer; }
+        .textbox { height: 22px; font-size: 20px; padding: 0px; width: 200px; }
+        /*角色选择列表*/
+        #dgSelectLoginGroup ul { padding: 0px; margin: 0px; list-style: none; }
+            #dgSelectLoginGroup ul li { margin: 0; text-align: center; }
+                #dgSelectLoginGroup ul li a { display: block; padding: 2px 2px 2px 0.5em; border-bottom: 1px solid #369; background-color: #6699CC; color: #fff; text-decoration: none; width: 95%; }
+                    #dgSelectLoginGroup ul li a:hover { border-right: 1px solid #69c; border-bottom: 1px solid #369; background-color: #69f; color: #fff; line-height: 25px; font-size: 14px; font-weight: bolder; }
+    </style>
+    <script src="@Url.Content("~/Scripts/js/Home/Login.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        if (self != top) {
+            parent.top.location.href = "/Home/Login";
+        }
+    </script>
+}
+<div id="loginForm">
+    <table class="tableLogin" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="width: 40%;" align="right">用户名：
+            </td>
+            <td>
+                <input type="text" name="userName" id="TB_UserName" value="admin" class="textbox" vrequired="t" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">密&nbsp;&nbsp;&nbsp;&nbsp;码：
+            </td>
+            <td>
+                <input type="password" name="pwd" id="TB_Pwd" value="1" class="textbox" vrequired="t" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">验证码：
+            </td>
+            <td>
+                <input type="text" maxlength="4" name="ValidateCode" id="TB_ValidateCode" value=""
+                    class="textbox"@* vrequired="t"*@/>
+                <img id="valiCode" style="cursor: pointer; vertical-align: middle;" onclick="RefreshValidateCode(this)"
+                    src="/Home/GetValidateCode" alt="验证码" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <img id="btnLogin" alt="登录" src="../../Content/images/loginBtn.png" />
+            </td>
+        </tr>
+    </table>
+</div>
+<!--角色选择dialog begin-->
+<div id="dgSelectLoginGroup">
+    <ul id="userSelect"></ul>
+</div>
+<!--角色选择dialog end-->

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "年终结算";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+<script type="text/javascript" src="@Url.Content("~/Scripts/js/Account/YearBalance.js")"></script>
+}
+<div class="toolbar" >
+客户名称：<input type="text" id="txtCustomer" />
+年份：<select id="dpYear"></select>
+<a id="btnSearch" href="javascript:void(0)" class="web_button">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+<a id="btnYearFee" href="javascript:void(0)" class="web_button">执行结算</a>
+</div>
+
+<table id="gridYearBalance">
+ <thead>  
+        <tr>  
+            <th field="ID" checkbox="true" width="30">选择</th>  
+            <th field="Name" width="70">客户名称</th>  
+            <th field="Money" width="70">欠费金额</th>  
+            <th field="Year" width="70">年份</th>
+            <th field="Status" width="70">处理状态</th>
+            <th field="ChargeDate" width="70">缴费时间</th>
+        </tr>  
+  </thead>  
+</table> 
+
+@*<table class="layoutTable" style="width:500px;">
+<tr><td>本年度总计收费：</td><td>元</td></tr>
+<tr><td>欠费：</td><td>元</td></tr>
+</table>*@

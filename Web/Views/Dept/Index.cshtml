@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "部门管理";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script src="@Url.Content("~/Scripts/js/Dept/Dept.js")" type="text/javascript"></script>
+}
+<div class="toolbar">
+    <a id="btnAdd" href="javascript:void(0)" class="web_button">新&nbsp;&nbsp;&nbsp;&nbsp;增</a>
+    <a id="btnModify" href="javascript:void(0)" class="web_button">修&nbsp;&nbsp;&nbsp;&nbsp;改</a>
+    <a id="btnDelete" href="javascript:void(0)" class="web_button">删&nbsp;&nbsp;&nbsp;&nbsp;除</a>
+</div>
+<table id="deptTreeGrid" class="easyui-treegrid" url="/Dept/GetAllDeptJson" singleselect="true" idfield="Identifier" treefield="Dept_Name" fitcolumns="true">
+    <thead>
+        <tr>
+            <th field="Identifier" checkbox="true" rowspan="2" width="20px" editor="text">选择</th>
+            <th field="Dept_Name" rowspan="2" width="150px" editor="text">部门名称</th>
+            <th field="Dept_Status" rowspan="2" width="150px" editor="text">部门状态</th>
+        </tr>
+    </thead>
+</table>
+<!--add begin-->
+<div id="dgAdd">
+    <input type="hidden" id="id" name="id" value="-1" dn="ID" rel="0" />
+    <table class="layout">
+        <tr>
+            <td>父级部门：</td>
+            <td>
+                <input type="hidden" id="txtPID" />
+                <input type="text" id="txtParentDeptName" value="" readonly="readonly" />
+                (*为空时添加到根目录)</td>
+        </tr>
+        <tr>
+            <td>
+                <label class="name">部门名称：</label></td>
+            <td>
+                <input type="text" name="name" id="txtDeptName" vrequired="t" /></td>
+        </tr>
+    </table>
+</div>
+<!--add end-->
+<!--edit begin-->
+<div id="dgEdit">
+    <input type="hidden" id="id" name="id" value="-1" dn="ID" rel="0" />
+    <table class="layout">
+        <tr>
+            <td>
+                <label class="name">部门名称：</label></td>
+            <td>
+                <input type="hidden" id="txtIDEdit" />
+                <input type="text" name="name" id="txtDeptNameEdit" vrequired="t" />
+            </td>
+        </tr>
+    </table>
+</div>
+<!--edit end-->

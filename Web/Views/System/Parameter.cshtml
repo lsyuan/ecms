@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "系统自定义参数设置";
+    Layout = "~/Views/Shared/_layoutContent.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/js/System/SystemParameter.js")" ></script>
+}
+<table class="layoutTable" id="tab" style="margin: 0 auto; width: 100%;">
+    <tr dd="ArrearTips" id="ArrearTips">
+        <td style="width: 50%">
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">欠费预警天数：</label></td>
+        <td>
+            <input type="text" name="TB_ArrearTips" id="TB_ArrearTips" dn="Value" value="" /></td>
+    </tr>
+    <tr dd="CommissionRatio" id="CommissionRatio">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">收费提成比例：</label></td>
+        <td>
+            <input type="text" name="TB_CommissionRatio" id="TB_CommissionRatio" dn="Value" value="" /></td>
+    </tr>
+    <tr dd="DelayChargeRatio" id="DelayChargeRatio">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">代收费缴费比例：</label></td>
+        <td>
+            <input type="text" name="TB_DelayChargeRatio" id="TB_DelayChargeRatio" dn="Value" value="" /></td>
+    </tr>
+    <tr dd="CustomerAutoPass" id="CustomerAutoPass">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">客户自动审批：</label></td>
+        <td>
+            <input type="text" name="TB_CustomerAutoPass" id="TB_CustomerAutoPass" dn="Value" value="" onkeydown="checkInput(this)" /><label style="color: gray; padding-left: 3px;">1表示是，0表示否</label>
+        </td>
+    </tr>
+    <tr dd="ChargeAutoPass" id="ChargeAutoPass">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">缴费自动审批：</label></td>
+        <td>
+            <input type="text" name="TB_ChargeAutoPass" id="TB_ChargeAutoPass" dn="Value" value="" onkeydown="checkInput(this)" /><label style="color: gray; padding-left: 3px;">1表示是，0表示否</label></td>
+    </tr>
+    <tr dd="OtherChargeAutoPass" id="OtherChargeAutoPass">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">其他缴费自动审批：</label></td>
+        <td>
+            <input type="text" name="TB_OtherChargeAutoPass" id="TB_OtherChargeAutoPass" dn="Value" value="" onkeydown="checkInput(this)" /><label style="color: gray; padding-left: 3px;">1表示是，0表示否</label></td>
+    </tr>
+    <tr dd="TempChargeAutoPass" id="TempChargeAutoPass">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">临时缴费自动审批：</label></td>
+        <td>
+            <input type="text" name="TB_TempChargeAutoPass" id="TB_TempChargeAutoPass" dn="Value" value="" onkeydown="checkInput(this)" /><label style="color: gray; padding-left: 3px;">1表示是，0表示否</label></td>
+    </tr>
+    <tr dd="ContrastAutoPass" id="ContrastAutoPass">
+        <td>
+            <input type="hidden" name="ID" value="" dn="ID" />
+            <input type="hidden" name="Name" value="" dn="Name" />
+            <input type="hidden" name="ValidateGroup" value="" dn="ValidateGroup" />
+            <label class="name">协议自动审批：</label></td>
+        <td>
+            <input type="text" name="TB_ContrastAutoPass" id="TB_ContrastAutoPass" dn="Value" value="" onkeydown="checkInput(this)" /><label style="color: gray; padding-left: 3px;">1表示是，0表示否</label></td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td colspan="2" align="center">
+            <a id="BT_Commit" onclick="Submit()" href="javascript:void(0)" class="web_button">确&nbsp;&nbsp;&nbsp;&nbsp;定</a>
+            <p></p>
+            <p></p>
+        </td>
+    </tr>
+</table>
