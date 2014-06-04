@@ -448,7 +448,7 @@ namespace Ajax.DAL
 		{
 			StringBuilder whereStr1 = new StringBuilder();
 			whereStr1.Append("tc.BeginChargeDate < GETDATE()");
-			if (string.IsNullOrEmpty(time))
+			if (!string.IsNullOrEmpty(time))
 			{
 				string[] aa = time.Split(',');
 				if (aa == null || aa.Length != 2)
