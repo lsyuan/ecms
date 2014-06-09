@@ -1,147 +1,20 @@
 ﻿@{
-    ViewBag.Title = "欠费用户统计";
-    Layout = "~/Views/Shared/_layoutContent.cshtml";
+	ViewBag.Title = "欠费用户统计";
+	Layout = "~/Views/Shared/_layoutContent.cshtml";
 }
 @section head{
-    <script type="text/javascript" src="@Url.Content("~/Scripts/js/Analysis/ArrearAnalysis.js")"></script>
-    <script src="@Url.Content("~/Scripts/LodopFuncs.js")" type="text/javascript"></script>
-    <style type="text/css">
-        #dgSelectCustomer { text-align: left; }
-        #Remark { height: 40px; width: 450px; }
-    </style>
+	<script src="@Url.Content("~/Scripts/highcharts.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/exporting.js")" type="text/javascript"></script>
+	<script type="text/javascript" src="@Url.Content("~/Scripts/js/Analysis/ArrearAnalysis.js")"></script>
+	<style type="text/css">
+		
+	</style>
 }
-
 <div id="toolbar" class="toolbar">统计类型：
-   @* <input type="hidden" id="txtAreaID" />
-    <input type="text" id="txtAreaName" readonly="readonly" dn="AreaName" />*@
-    <select id="AnalysisType">
-       <option value="0">按区域统计</option><option value="1">按单位类型统计</option>
-    </select>
-    <a id="btnAnalysis" href="javascript:void(0)" onclick="Query()" class="web_button">统&nbsp;&nbsp;&nbsp;&nbsp;计</a>
-    <a id="btnPrint" href="javascript:print()" class="web_button">打印图表</a></div>
-<div id="print">
-    <div id="tabs" class="easyui-tabs" >
-    <div title="欠费用户列表">
-    <table id="ArrearDataTable">
-        <thead>
-            <tr>
-                <th width="10" field="ID" hidden="true">ID
-                </th>
-                <th width="10" field="NAME">客户名称
-                </th>
-                <th width="10" field="CODE">客户编号
-                </th>
-                <th width="10" field="CONTACTOR">联系人
-                </th>
-                <th width="10" field="PHONE">电话
-                </th>
-                <th width="10" field="MOBILEPHONE">手机
-                </th>
-                <th width="10" field="ADDRESS">地址
-                </th>
-                <th width="10" field="BEGINCHARGEDATE">开始缴费时间
-                </th>
-                <th width="10" field="TYPENAME">客户类型
-                </th>
-                <th width="10" field="AREANAME">所在区域
-                </th>
-            </tr>
-        </thead>
-    </table>
-    </div>
-    <div title="图形统计"></div>
-    </div>
+	@*<select id="AnalysisType">
+		<option value="0">按区域统计</option>
+		<option value="1">按单位类型统计</option>
+	</select>*@
+	<a id="btnAnalysis" href="javascript:void(0)" onclick="BeginStastics()" class="web_button">开始统计</a>
 </div>
-@*<div id="dArea">
-    <table id="areaTreeGrid" class="easyui-treegrid" checkbox="true" url="/System/GetAllAreaJson"
-        idfield="Identifier" treefield="Area_Name" fitcolumns="true">
-        <thead>
-            <tr>
-                <th field="Identifier" checkbox="true" rowspan="2" editor="text">地区码
-                </th>
-                <th field="Area_Name" rowspan="2" width="150" editor="text">地区
-                </th>
-                <th field="ManagerName" rowspan="2" width="50">区域负责人
-                </th>
-            </tr>
-        </thead>
-    </table>
-</div>*@
-
-@*
-<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" height="0"
-    width="0">
-    <embed id="LODOP_EM" height="0" pluginspage="install_lodop.exe" type="application/x-print-lodop"
-        width="0"></embed>
-</object>
-
-<div id="Div_SingleArrearMsg" style="display: none">
-    <div style="width: 100%; text-align: center; font-size: 16pt;"><b>@ViewBag.OrgName 环境卫生收费催缴单</b></div>
-    <div style="width: 100%; text-align: right; font-size: 10pt;">编号：CZ0233201</div>
-    <hr />
-    <div style="width: 100%; text-align: left; font-size: 11pt;">
-        <span style="text-decoration: underline" dn="Name"></span>
-        <br />
-        <br />
-        <div style="width: 100%; text-align: left; padding-left: 50px;">自
-            <span dn="BeginChargeDate"></span>
-            你已欠费 400 元，请及时到环卫处缴纳环卫管理费用！谢谢合作！<br />
-
-        </div>
-        <div style="width: 100%; text-align: left; font-family: 宋体"><br />
-            <br />
-            缴费明细：<br />
-            <br />
-            <table width="100%" align="center" bordercolor='black' border='1' style="border-collapse: collapse">
-                <thead>
-                    <tr>
-                        <th>收费项名称</th>
-                        <th>收费单价</th>
-                        <th>收费单位</th>
-                        <th>周期性收费</th>
-                        <th>能否按协议</th>
-                        <th>数量</th>
-                        <th>单项金额</th>
-                        <th>协议金额</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input class="chargeItemID" type="hidden" value="402607587B8E414C81F78CECA55CE738">污水</td>
-                        <td>3.32</td>
-                        <td>吨.月</td>
-                        <td>是</td>
-                        <td>能</td>
-                        <td>2</td>
-                        <td>6.64</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input class="chargeItemID" type="hidden" value="29D7DE61AB7D42AD81BAE6DD76C9B690">建筑垃圾</td>
-                        <td>3.11</td>
-                        <td>吨.月</td>
-                        <td>是</td>
-                        <td>能</td>
-                        <td>53</td>
-                        <td>15.55</td>
-                        <td>0</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td align="right" colspan="8">缴费项总数：<label id="lblFeeItemCount">2</label>
-                            一次性缴费总数：<label id="lblFeeCount">22.19</label></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <br />
-        <br />
-        <div style="width: 100%; text-align: right; padding-right: 10px;">五莲环卫管理处<br />
-            <br />
-            2013年7月24日
-        </div>
-    </div>
-</div>*@
+<div id="FeeStastics" style="min-width: 400px; height: 400px; margin: 0 auto"></div>

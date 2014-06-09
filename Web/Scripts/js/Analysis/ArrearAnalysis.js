@@ -2,80 +2,80 @@
 	InitCtrl();
 });
 
+var analysisChart;
 function InitCtrl() {
-	//选择统计区域弹出框
-	var buttons = [
-        {
-        	iconCls: 'icon-ok',
-        	minimizable: false,
-        	text: "确定",
-        	handler: function () {
-        		var chkObjs = $("#areaTreeGrid").treegrid("getSelected");
-        		if (chkObjs != null && chkObjs.Identifier != "") {
-        			$("#txtAreaID").val(chkObjs.Identifier);
-        			$("#txtAreaName").searchbox('setValue', chkObjs.Area_Name);
-        		}
-        		$("#dArea").dialog("close");
-        	}
-        }
-    ];
-	InitDialog("dArea", "选择统计区域：", 650, 400, null, buttons);
-	//所属地区
-	$('#txtAreaName').searchbox({
-		searcher: function (value, name) {
-			if (value != "") {
-				$("#areaTreeGrid").treegrid("select", value);
-			}
-			$("#dArea").dialog("open");
+	//统计图表
+	analysisChart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'FeeStastics',
+			type: 'column'
 		},
-		validtype: "selectValueRequired",
-		prompt: ''
+		title: {
+			text: '<b>地区欠费统计</b>'
+		},
+		credits: { enabled: false },
+		xAxis: {
+			categories: [],
+			title: { text: '地区' },
+			labels: {
+				rotation: 90,
+				y: 20,
+				style: {
+					fontSize: '13px',
+					fontFamily: 'Verdana, sans-serif'
+				}
+			}
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: '欠费金额(￥)'
+			}
+		},
+		legend: {
+			enabled: false
+		},
+		tooltip: {
+			formatter: function () {
+				return '<b>' + this.x + '</b>' +
+                        '欠费总金额: ￥' + Highcharts.numberFormat(this.y, 2);
+			}
+		},
+		series: [{
+			name: 'Population',
+			data: [],
+			dataLabels: {
+				enabled: true,
+				rotation: -90,
+				color: '#FFFFFF',
+				align: 'right',
+				x: 4,
+				y: 10,
+				style: {
+					fontSize: '13px',
+					fontFamily: 'Verdana, sans-serif'
+				}
+			}
+		}]
 	});
-	//searchbox文本区点击处理
-	$(".searchbox-text").click(function () {
-		$(this).next().eq(0).find(".searchbox-button").trigger("click")
-	});
-	var toolbar = [{
-		iconCls: 'icon-add',
-		text: "打印催收表",
-		handler: function () {
-			print();
+}
+//开始统计
+function BeginStastics() {
+	var areaList = [];
+	$.post("/Analysis/FeeStastics", { areaID: "" }, function (jsonData) {
+		var areaFeeList = [];
+		for (var index = 0; index < jsonData.areaList.length; index++) {
+			var feeCount = 0;
+			$.each(jsonData.stasticsList, function (i) {
+				if (jsonData.stasticsList[i].areaName == jsonData.areaList[index]) {
+					feeCount += parseFloat(jsonData.stasticsList[i].fee);
+				}
+			});
+			areaFeeList.push(feeCount);
 		}
-	}];
-
-	var queryParams = { areaID: "" };
-	InitGridTable('#ArrearDataTable', "", '/Analysis/GetArrearList', toolbar, queryParams, true);
-
+		analysisChart.series[0].setData(areaFeeList)
+		analysisChart.xAxis[0].setCategories(jsonData.areaList);
+	}, "json");
 }
 
-function Query() {
-	var queryParams = { areaID: $("#txtAreaID").val() };
-	$("#ArrearDataTable").datagrid('reload', queryParams);
-}
-
-//#region 打印
-var LODOP;
-function print() {
-	CreateOneFormPage();
-}
-function CreateOneFormPage() {
-	var a = $("#ArrearDataTable").datagrid("getSelected");
-	if (a == null && a == undefined) {
-		return;
-	}
-	var data = new Object();
-	data.Name = a.NAME;
-	data.BeginChargeDate = a.BEGINCHARGEDATE;
-	$("#Div_SingleArrearMsg").JsonData(data);
-	LODOP = getLodop(document.getElementById('LODOP'), document.getElementById('LODOP_EM'));
-	LODOP.PRINT_INIT("欠费列表");
-	LODOP.SET_PRINT_STYLE("FontSize", 18);
-	LODOP.SET_PRINT_STYLE("Bold", 1);
-	LODOP.SET_PRINT_STYLE("Alignment", 2);
-	LODOP.SET_PRINT_PAGESIZE(1, '210mm', '297mm', 'A4');
-	//LODOP.ADD_PRINT_TEXT(50, 231, 260, 39, "欠费列表");
-	LODOP.ADD_PRINT_HTM(50, 50, 700, 800, document.getElementById("Div_SingleArrearMsg").innerHTML);
-	LODOP.PREVIEW();
-};
-//#endregion打印
 

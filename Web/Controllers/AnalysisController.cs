@@ -84,7 +84,7 @@ namespace Web.Controllers
 		{
 			ViewBag.OrgName = "五莲环卫管理处";
 			return View();
-		} 
+		}
 		/// <summary>
 		/// 获取欠费统计信息
 		/// </summary>
@@ -99,6 +99,30 @@ namespace Web.Controllers
 		#endregion
 
 		#region Reports
+		/// <summary>
+		/// 欠费统计
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult FeeStastics()
+		{
+			ChargeRule cRule = new ChargeRule();
+			var customerArrearList = cRule.GetArrearList("", "");
+			var stasticsList = from f in customerArrearList
+							   select new
+							   {
+								   name = f.NAME,
+								   areaName = f.AREANAME,
+								   fee = cRule.CaculateCustomerFee(f.ID)
+							   };
+			List<Area> areaList = new AreaRule().GetList(@" and Pid in(select ID from T_area where PID is null) ");
+			List<string> areaFirstLevel = new List<string>();
+			foreach (Area a in areaList)
+			{
+				areaFirstLevel.Add(a.Name);
+			}
+			return Json(new { stasticsList = stasticsList, areaList = areaFirstLevel }, JsonRequestBehavior.AllowGet);
+		}
+
 		[AccessFilter(PoupEnums.报表分析, AccessEnums.Read)]
 		public ActionResult Reports()
 		{
