@@ -45,16 +45,7 @@ function InitCtrl() {
 			name: 'Population',
 			data: [],
 			dataLabels: {
-				enabled: true,
-				rotation: -90,
-				color: '#FFFFFF',
-				align: 'right',
-				x: 4,
-				y: 10,
-				style: {
-					fontSize: '13px',
-					fontFamily: 'Verdana, sans-serif'
-				}
+				enabled: true
 			}
 		}]
 	});
@@ -77,5 +68,3 @@ function BeginStastics() {
 		analysisChart.xAxis[0].setCategories(jsonData.areaList);
 	}, "json");
 }
-
-
