@@ -54,5 +54,13 @@ namespace Ajax.Model
 		#endregion Model
 
 	}
+	/// <summary>
+	/// 缴费详细状态
+	/// </summary>
+	public enum ChargeDetailStatus
+	{
+		正常 = 1,
+		已退费 = 2
+	}
 }
 

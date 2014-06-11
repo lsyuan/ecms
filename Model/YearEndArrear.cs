@@ -49,5 +49,14 @@ namespace Ajax.Model
 		#endregion Model
 
 	}
+	/// <summary>
+	/// 年终欠费处理状态
+	/// </summary>
+	public enum YearEndArrearStatus
+	{
+		欠费未缴纳 = 0,
+		欠费已缴纳 = 1,
+		呆坏账 = 2
+	}
 }
 

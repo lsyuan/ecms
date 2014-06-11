@@ -100,14 +100,23 @@ namespace Ajax.Model
 		/// 负责人
 		/// </summary>
 		[Column("负责人", "ManagerID", "varchar", 32)]
-        public string ManagerID { get; set; }
-        /// <summary>
-        /// 代收费权限（0：无，1：有）
-        /// </summary>
-        [Column("代收费权限", "Agent", "int")]
-        public int Agent { get; set; }
+		public string ManagerID { get; set; }
+		/// <summary>
+		/// 代收费权限（0：无，1：有）
+		/// </summary>
+		[Column("代收费权限", "Agent", "int")]
+		public int Agent { get; set; }
 		#endregion Model
 
+	}
+	/// <summary>
+	/// 客户状态
+	/// </summary>
+	public enum CustomerStatus
+	{
+		有效 = 0,
+		无效 = 1,
+		已删除 = 2
 	}
 }
 

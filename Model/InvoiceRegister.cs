@@ -49,7 +49,7 @@ namespace Ajax.Model
 		/// <summary>
 		/// 最后使用时间
 		/// </summary>
-        [Column("最后使用时间", "LastUseTime", "DateTime")]
+		[Column("最后使用时间", "LastUseTime", "DateTime")]
 		public DateTime? LastUseTime { get; set; }
 		/// <summary>
 		/// 整个票段的使用状态，0已登记未使用，1正在使用
@@ -63,6 +63,14 @@ namespace Ajax.Model
 		public string InvoiceType { get; set; }
 		#endregion Model
 
+	}
+	/// <summary>
+	/// 票段使用状态
+	/// </summary>
+	public enum InvoiceRegisterStatus
+	{
+		已登记未使用 = 0,
+		正在使用 = 1
 	}
 }
 

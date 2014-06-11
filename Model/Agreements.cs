@@ -81,5 +81,15 @@ namespace Ajax.Model
 		#endregion Model
 
 	}
+	/// <summary>
+	/// 协议状态
+	/// </summary>
+	public enum AgreementStatus
+	{
+		未审批 = 0,
+		已审批 = 1,
+		已删除 = 2,
+		已过期 = 3
+	}
 }
 

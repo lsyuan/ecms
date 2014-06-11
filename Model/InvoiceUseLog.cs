@@ -64,5 +64,14 @@ namespace Ajax.Model
 		#endregion Model
 
 	}
+	/// <summary>
+	/// 票据使用状态
+	/// </summary>
+	public enum InvoiceStatus
+	{
+		正常使用 = 1,
+		已作废 = 2,
+		直接作废 = 3
+	}
 }
 

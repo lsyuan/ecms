@@ -84,5 +84,14 @@ namespace Ajax.Model
 		#endregion Model
 
 	}
+	/// <summary>
+	/// 职员状态
+	/// </summary>
+	public enum EmpStatus
+	{
+		在职 = 1,
+		离职 = 2,
+		停职 = 3
+	}
 }
 

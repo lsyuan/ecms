@@ -32,7 +32,7 @@ namespace Ajax.Model
 		[Column("欠费金额", "Money", "decimal", 12)]
 		public decimal Money { get; set; }
 		/// <summary>
-        /// 状态，0未缴费，1待审核，2已缴费，3已删除
+		/// 状态，0未缴费，1待审核，2已缴费，3已删除
 		/// </summary>
 		[Column("状态", "Status", "int")]
 		public int Status { get; set; }
@@ -48,6 +48,15 @@ namespace Ajax.Model
 		public string Year { get; set; }
 		#endregion Model
 
+	}
+	/// <summary>
+	/// 初始费用状态
+	/// </summary>
+	public enum FirstMoneStatus
+	{
+		未缴费 = 0,
+		已缴费 = 1,
+		已删除 = 2
 	}
 }
 
