@@ -122,9 +122,9 @@ namespace Ajax.DAL
 		/// </summary>
 		public List<dynamic> GetTipContracts(int top)
 		{
-			string strSql = string.Format(@"SELECT top 10 c.name,a.EndDate  FROM T_Agreements a
-                                            left join T_Customer c on c.ID=a.customerID
-                                            where a.status=1 and datediff(day,getdate(),a.endDate)<=10 ", top);
+			string strSql = string.Format(@"select top {0} c.name,a.EndDate from T_Agreements a 
+											left join T_Customer c on c.ID=a.customerID 
+											where a.status='1' and datediff(day,getdate(),a.endDate)<=30 ", top);
 			using (DBHelper db = DBHelper.Create())
 			{
 				return db.GetDynaminObjectList(strSql, null);
@@ -242,23 +242,23 @@ namespace Ajax.DAL
 				return db.GetModel<Agreements>(" and status=1 and customerID=@customerID", dic);
 			}
 		}
-        /// <summary>
-        /// 获取剩余未缴纳的协议金额
-        /// </summary>
-        /// <param name="agreementID"></param>
-        /// <returns></returns>
-        public decimal GetLastAgreeFee(string agreementID)
-        {
-            string strSql = @"select
+		/// <summary>
+		/// 获取剩余未缴纳的协议金额
+		/// </summary>
+		/// <param name="agreementID"></param>
+		/// <returns></returns>
+		public decimal GetLastAgreeFee(string agreementID)
+		{
+			string strSql = @"select
                             (select money from T_agreements a where a.ID='{0}' )
                             -(select sum(Money) from T_charge c where c.agreementID='{0}') ";
-            using (DBHelper db = DBHelper.Create())
-            {
-                object feeObj= db.ExecuteScalar(string.Format(strSql,agreementID), null);
-                decimal fee=Convert.ToDecimal(feeObj);
-                return fee > 0 ? fee : 0;
-            }
-        }
+			using (DBHelper db = DBHelper.Create())
+			{
+				object feeObj = db.ExecuteScalar(string.Format(strSql, agreementID), null);
+				decimal fee = Convert.ToDecimal(feeObj);
+				return fee > 0 ? fee : 0;
+			}
+		}
 		#endregion  Method
 	}
 }
