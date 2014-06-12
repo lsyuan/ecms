@@ -4,6 +4,15 @@
 
 var analysisChart;
 function InitCtrl() {
+	//初始化弹出窗
+	$('#dgCustomerList').dialog({
+		title: '欠费用户列表',
+		width: 400,
+		height: 300,
+		closed: true,
+		cache: false,
+		modal: true
+	});
 	//统计图表
 	analysisChart = new Highcharts.Chart({
 		chart: {
@@ -35,14 +44,25 @@ function InitCtrl() {
 		legend: {
 			enabled: false
 		},
+		plotOptions: {
+			column: {
+				cursor: 'pointer',
+				events: {
+					click: function (event) {
+						var title = "'" + event.point.category + "'的欠费用户：";
+						$('#dgCustomerList').dialog("open").dialog("setTitle", title);
+					}
+				}
+			}
+		},
 		tooltip: {
 			formatter: function () {
 				return '<b>' + this.x + '</b>' +
-                        '欠费总金额: ￥' + Highcharts.numberFormat(this.y, 2);
+                        '欠费总金额: ￥' + Highcharts.numberFormat(this.y, 2) + "<br />点击查看欠费用户";
 			}
 		},
 		series: [{
-			name: 'Population',
+			name: '欠费金额',
 			data: [],
 			dataLabels: {
 				enabled: true
