@@ -106,20 +106,41 @@ namespace Web.Controllers
 		public ActionResult FeeStastics()
 		{
 			ChargeRule cRule = new ChargeRule();
+			AreaRule aRule = new AreaRule();
 			var customerArrearList = cRule.GetArrearList("", "");
 			var stasticsList = from f in customerArrearList
 							   select new
 							   {
+								   //               <th width="10" field="ID" checkbox="true">ID </th>
+								   //<th width="10" field="NAME">客户名称 </th>
+								   //<th width="10" field="CODE">客户编号 </th>
+								   //<th width="10" field="CONTACTOR">联系人 </th>
+								   //<th width="10" field="PHONE">电话 </th>
+								   //<th width="10" field="MOBILEPHONE">手机 </th>
+								   //<th width="10" field="ADDRESS">地址 </th>
+								   //<th width="10" field="BEGINCHARGEDATE">开始缴费时间 </th>
+								   //<th width="10" field="TYPENAME">客户类型 </th>
+								   //<th width="10" field="AREANAME">所在区域 </th>
 								   name = f.NAME,
+								   CODE = f.CODE,
+								   CONTACTOR = f.CONTACTOR,
+								   PHONE = f.PHONE,
+								   MOBILEPHONE = f.MOBILEPHONE,
+								   ADDRESS = f.ADDRESS,
+								   BEGINCHARGEDATE = f.BEGINCHARGEDATE,
+								   TYPENAME = f.TYPENAME,
 								   areaName = f.AREANAME,
-								   fee = cRule.CaculateCustomerFee(f.ID)
+								   fee = cRule.CaculateCustomerFee(f.ID),
+								   areaID = f.AREAID
 							   };
 			List<Area> areaList = new AreaRule().GetList(@" and Pid in(select ID from T_area where PID is null) ");
-			List<string> areaFirstLevel = new List<string>();
-			foreach (Area a in areaList)
-			{
-				areaFirstLevel.Add(a.Name);
-			}
+			var areaFirstLevel = from area in areaList
+								 select new
+								 {
+									 ID = area.ID,
+									 Name = area.Name,
+									 childrenIDs = string.Join(",", aRule.GetAllChildrenID(area.ID))
+								 };
 			return Json(new { stasticsList = stasticsList, areaList = areaFirstLevel }, JsonRequestBehavior.AllowGet);
 		}
 

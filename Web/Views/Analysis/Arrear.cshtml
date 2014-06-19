@@ -4,18 +4,33 @@
 }
 @section head{
 	<script src="@Url.Content("~/Scripts/highcharts.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/exporting.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/exporting.js")" type="text/javascript"></script>
 	<script src="@Url.Content("~/Scripts/grid.js")" type="text/javascript"></script>
 	<script type="text/javascript" src="@Url.Content("~/Scripts/js/Analysis/ArrearAnalysis.js")"></script>
 	<style type="text/css">
 		
 	</style>
 }
-<div id="toolbar" class="toolbar" style="text-align:center;">
+<div id="toolbar" class="toolbar" style="text-align: center;">
 	<a id="btnAnalysis" href="javascript:void(0)" onclick="BeginStastics()" class="web_button">开始统计</a>
 </div>
 <div id="FeeStastics" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 <!--dialog customerList-->
 <div id="dgCustomerList">
-
+	<table id="ArrearDataTable" class="easyui-datagrid">
+		<thead>
+			<tr>
+				<th field="name">客户名称 </th>
+				<th field="CODE">客户编号 </th>
+				<th field="CONTACTOR">联系人 </th>
+				<th field="PHONE">电话 </th>
+				<th field="MOBILEPHONE">手机 </th>
+				<th field="ADDRESS">地址 </th>
+				<th field="BEGINCHARGEDATE">开始缴费时间 </th>
+				<th field="TYPENAME">客户类型 </th>
+				<th field="areaName">所在区域 </th>
+				<th field="fee">欠费金额</th>
+			</tr>
+		</thead>
+	</table>
 </div>

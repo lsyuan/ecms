@@ -449,6 +449,7 @@
     <Content Include="Scripts\Ajax.Common.js" />
     <Content Include="Scripts\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\exporting.js" />
+    <Content Include="Scripts\grid.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Content\jquery.autocomplete.css" />
