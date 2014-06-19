@@ -254,6 +254,34 @@ namespace Ajax.DAL
 				return db.GetDynaminObjectList(strSql, null);
 			}
 		}
+		/// <summary>
+		/// 获取子级所有地区ID
+		/// </summary>
+		/// <param name="PAreaID"></param>
+		/// <returns></returns>
+		public List<string> GetAllChildrenID(string PAreaID)
+		{
+			List<string> areaIDList = new List<string>();
+			string strSql = @"WITH  area(ID,pID,name) 
+							AS
+							(
+							SELECT ID,name,PID FROM dbo.T_Area  WHERE dbo.T_Area.PID=@PID
+							UNION ALL SELECT t_area.ID,dbo.T_Area.Name,dbo.T_Area.PID FROM area,dbo.T_Area 
+							WHERE area.ID=dbo.T_Area.PID
+							)
+							SELECT ID FROM area WHERE name IS NOT NULL";
+			using (DBHelper db = DBHelper.Create())
+			{
+				Dictionary<string, object> paramDic = new Dictionary<string, object>();
+				paramDic.Add("PID", PAreaID);
+				System.Data.Common.DbDataReader ddr = db.ExecuteReader(strSql, paramDic);
+				while (ddr.Read())
+				{
+					areaIDList.Add(ddr["ID"].ToString());
+				}
+			}
+			return areaIDList;
+		}
 	}
 }
 

@@ -467,7 +467,7 @@ namespace Ajax.DAL
 				//whereStr2.Clear().AppendFormat(" (tc.BeginChargeDate >= dateadd(m,{0},GETDATE()) and tc.BeginChargeDate >= dateadd(m,{1},GETDATE()))", litter * -1, bigger * -1);
 			}
 			string sql = @"SELECT tc.ID, tc.Name, tc.Code, tc.Contactor, tc.Phone, tc.MobilePhone, tc.[Address], 
-									tc.BeginChargeDate, tct.Name AS typeName, ta.Name AS areaName
+									tc.BeginChargeDate, tct.Name AS typeName, ta.Name AS areaName,ta.ID AS areaID
 							FROM   T_Customer tc
 									INNER JOIN T_CustomerType tct
 										ON  tct.ID = tc.TypeID
@@ -484,7 +484,7 @@ namespace Ajax.DAL
 									And TC.AREAID LIKE @AREAID
 							UNION ALL
 							SELECT tc.ID, tc.Name, tc.Code, tc.Contactor, tc.Phone, tc.MobilePhone, tc.[Address], 
-									tc.BeginChargeDate, tct.Name AS typeName, ta.Name AS areaName
+									tc.BeginChargeDate, tct.Name AS typeName, ta.Name AS areaName,ta.ID AS areaID
 							FROM   T_Customer tc
 									INNER JOIN T_CustomerType tct
 										ON  tct.ID = tc.TypeID
